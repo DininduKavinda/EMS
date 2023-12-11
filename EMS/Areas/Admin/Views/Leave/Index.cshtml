@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@model List<Leave>
+<div class="container">
+    <div class="row pt-4 pb3">
+        <div class="col-6">
+            <h1 class="text-primary">Employees</h1>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Leave" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Apply For New Leave Form
+            </a>
+        </div>
+    </div>
+    <table id="tblData" class="table table-striped" style="width:100%">
+        <thead>
+
+            <tr>
+                <th>C-ID</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Apply Date</th>
+                <th>Reason</th>
+                <th>Leaving Date </th>
+                <th>Return Date</th>
+                <th>ApprovedBy</th>
+                <th>View</th>
+            </tr>
+        </thead>
+    </table>
+    @section Scripts{
+        <script src="~/js/Leave.js"></script>
+    }
+</div>

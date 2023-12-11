@@ -1,0 +1,198 @@
+﻿@model EmployeeViewModel
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Employee @(Model.Employee.Id != 0 ? "Edit" : "Registration") Form</h5>
+                <form asp-action="Upsert" method="post" class="my-4" enctype="multipart/form-data">
+                    <input asp-for="Employee.Id" hidden />
+                    <div class="text-danger mb-4"></div>
+                    <div class="row">
+                        @if (Model.Employee.Id != 0)
+                        {
+                            <div class="col-md-4">
+                                <h5 class="card-title fw-semibold mb-4"></h5>
+                                <div class="card">
+                                    <img src="@Model.Employee.Emp_dp" class="card-img-top" alt="...">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <!-- Label and Data Cells -->
+                                        <td><strong>Employee Name:</strong></td>
+                                        <td>@Model.Employee.Emp_full_name</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Employee ID:</strong></td>
+                                        <td>@Model.Employee.Emp_Cid</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Job Title:</strong></td>
+                                        <td>@Model.Employee.JobTitle.jt_name</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Gender:</strong></td>
+                                        <td>@Model.Employee.Gender.GenderName</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Department:</strong></td>
+                                        <td>@Model.Employee.Department.Department_Name</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>NIC:</strong></td>
+                                        <td>@Model.Employee.Emp_NIC</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Date of Birth:</strong></td>
+                                        <td>@Model.Employee.Emp_DateOfBirth</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Start Date:</strong></td>
+                                        <td>@Model.Employee.Emp_start_date</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Contact Info:</strong></td>
+                                        <td>@Model.Employee.Emp_contact_info</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Address:</strong></td>
+                                        <td>@Model.Employee.Emp_Address</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                   
+
+
+
+                    <table class="table">
+                        <tr hidden>
+                            <td>
+                                <label asp-for="PayRoll.EmployeeID" class="control-label"></label>
+                            </td>
+                            <td>
+                                <input asp-for="PayRoll.EmployeeID" class="form-control" value="@Model.Employee.Id" />
+                                <span asp-validation-for="PayRoll.EmployeeID" class="text-danger"></span>
+                            </td>
+                        </tr>                      
+                        <tr>
+                                <td>
+                                <label asp-for="PayRoll.Allowances" class="control-label"></label>
+                            </td>
+                             <td>
+                                <input asp-for="PayRoll.Allowances" class="form-control" />
+                                <span asp-validation-for="PayRoll.Allowances" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label asp-for="PayRoll.Advanced" class="control-label"></label>
+                            </td>
+                            <td>
+                                <input asp-for="PayRoll.Advanced" class="form-control" />
+                                <span asp-validation-for="PayRoll.Advanced" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label asp-for="PayRoll.WorkDays" class="control-label"></label>
+                            </td>
+                            @{
+                                var today = DateTime.Now.AddMonths(-1);
+                                var desiredMonth = new DateTime(today.Year, today.Month, 1);
+                                var attendanceCount = Model.Attendance.Where(a => a.attendance_date.Month == today.Month && a.attendance_date.Year == today.Year && a.attendance_e_id == Model.Employee.Id).Count();
+                            }
+                            <td>
+                                <input asp-for="PayRoll.WorkDays" value="@attendanceCount" class="form-control" />
+                                <span asp-validation-for="PayRoll.WorkDays" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label asp-for="PayRoll.NetBasicSalary" class="control-label"></label>
+                            </td>
+                            <td>
+                                <input asp-for="PayRoll.NetBasicSalary" class="form-control" />
+                                <span asp-validation-for="PayRoll.NetBasicSalary" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label asp-for="PayRoll.NetSalary" class="control-label"></label>
+                            </td>
+                            <td>
+                                <input asp-for="PayRoll.NetSalary" class="form-control" />
+                                <span asp-validation-for="PayRoll.NetSalary" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label asp-for="PayRoll.PraperedDate" class="control-label"></label>
+                            </td>
+                            <td>
+                                <input asp-for="PayRoll.PraperedDate" class="form-control" />
+                                <span asp-validation-for="PayRoll.PraperedDate" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label asp-for="PayRoll.CreatedBy" class="control-label"></label>
+                            </td>
+                            <td>
+                                <input asp-for="PayRoll.CreatedBy" class="form-control" />
+                                <span asp-validation-for="PayRoll.CreatedBy" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label asp-for="PayRoll.PayedDate" class="control-label"></label>
+                            </td>
+                            <td>
+                                <input asp-for="PayRoll.PayedDate" class="form-control" />
+                                <span asp-validation-for="PayRoll.PayedDate" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label asp-for="PayRoll.ApprovedBy" class="control-label"></label>
+                            </td>
+                            <td>
+                                <input asp-for="PayRoll.ApprovedBy" class="form-control" />
+                                <span asp-validation-for="PayRoll.ApprovedBy" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <!-- Repeat similar blocks for other properties -->
+                    </table>
+
+                    <div class="row mt-4">
+                        <div class="col-1">
+                            @if (Model.Employee.Id != 0)
+                            {
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            }
+
+                        </div>
+                        <div class="col-1">
+                            <a asp-asp-controller="Employee" asp-action="Index" class="btn btn-secondary from-control">Back</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

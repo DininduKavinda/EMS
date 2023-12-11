@@ -1,0 +1,134 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model AttendanceVM
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Attendance @(Model.Attendance.Id != 0 ? "Out" : "In") Form - @(Model.Attendance.Id != 0 ? Model.Attendance.Employee?.Emp_full_name : "")</h5>
+                
+                <form asp-action="Create" id="form1" runat="server" method="post" class="my-4" enctype="multipart/form-data">
+                    <input asp-for="Attendance.Id" hidden />
+                    @if (Model.Attendance.Id != 0)
+                    {
+                        <input asp-for="Attendance.attendance_in_image" hidden />
+                        <input asp-for="Attendance.attendance_out_image" id="in_image" hidden />
+                    }
+                    else{
+                        <input asp-for="Attendance.attendance_in_image" id="in_image" hidden />
+                        <input asp-for="Attendance.attendance_out_image"  hidden />
+                    }
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="card-title fw-semibold mb-4"></h5>
+                            <div class="card">
+                                <div id="webcam" class="card-img-top" alt="..."> </div>
+                            </div>
+                            <div class="card">
+                                <img id="imgCapture" class="card-img-top" alt="..." hidden/>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                              @*   <input id="btnCapture" class="btn btn-success" type="button" value="Capture" /> *@
+                             
+                    <div class="text-danger mb-4"></div>
+                    
+                    <div class="row mt-4" @(Model.Attendance.Id != 0 ? "Hidden" : "")>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Attendance.attendance_e_id" class="control-label"></label>
+                                <select asp-for="@Model.Attendance.attendance_e_id" asp-items="@Model.EmployeeList" class="select2 form-select ">
+                                    <option disabled value="0">Select Name</option>
+                                </select>
+                                <span asp-validation-for="Attendance.attendance_e_id" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6" hidden>
+                            <div class="form-group">
+                                <label asp-for="Attendance.attendance_date" class="control-label"></label>
+                                @if (Model.Attendance.Id != 0)
+                                {
+                                    <input type="date" asp-for="Attendance.attendance_date" class="form-control" />                                  
+                                }
+                                else
+                                {
+                                    <input type="date" asp-for="Attendance.attendance_date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                }
+                                    <span asp-validation-for="Attendance.attendance_date" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        
+                        <div class="col-md-6" hidden>
+                            <div class="form-group">
+                                <label asp-for="Attendance.attendance_in_time" class="control-label"></label>
+                                @if (Model.Attendance.Id != 0)
+                                {
+                                     <input type="time" asp-for="Attendance.attendance_in_time" class="form-control" />
+                                }
+                                else
+                                {
+                                    <input type="time" asp-for="Attendance.attendance_in_time" class="form-control" value="@DateTime.Now.ToString("HH:mm:ss")" />
+                                }
+                                
+                                <span asp-validation-for="Attendance.attendance_in_time" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6" hidden>
+                            <div class="form-group">
+                                <label asp-for="Attendance.attendance_out_time" class="control-label"></label>
+                                <input   type="time" asp-for="Attendance.attendance_out_time" class="form-control" value="@DateTime.Now.ToString("HH:mm:ss")" />
+                                <span asp-validation-for="Attendance.attendance_out_time" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4" >
+                        <div class="col-1">
+                            <button type="submit" id="btnCapture" class="btn btn-primary">Create</button>
+                        </div>
+                        <div class="col-1">
+                            <a asp-asp-controller="Attendance" asp-action="Index" class="btn btn-secondary from-control">Back</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2();
+        });
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="~/WebCam.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            Webcam.set({
+                width: 480,
+                height: 320,
+                image_format: 'jpeg',
+                jpeg_quality: 50
+            });
+            Webcam.attach('#webcam');
+            $("#btnCapture").click(function () {
+                Webcam.snap(function (data_uri) {
+                    $("#imgCapture")[0].src = data_uri;
+                    $("#in_image").val(data_uri);
+                });
+            });
+            
+        });
+    </script>
+}

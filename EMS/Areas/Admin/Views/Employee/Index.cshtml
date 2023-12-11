@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Index"; 
+}
+@model List<Employee>
+<div class="container">
+    <div class="row pt-4 pb3">
+        <div class="col-6">
+            <h1 class="text-primary">Employees</h1>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Employee" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Add New
+            </a>
+        </div>
+    </div>
+    <table id="tblData" class="table table-striped" style="width:100%">
+        <thead>
+           
+            <tr>
+                <th>C-ID</th>
+                <th>Department</th>
+                <th>Name</th>
+                <th>DOB</th>
+                <th>NIC</th>
+                <th>Position</th>
+                <th>Contact</th>
+                <th>Joined Date</th>
+                <th>Active</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+    @section Scripts{
+        <script src="~/js/Employee.js"></script>
+    }
+</div>
+

@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@model List<Attendance>
+<div class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="page-title">Attendance Sheet</h4>
+        </div>
+    </div>
+    <div class="row filter-row">
+        <div class="col-sm-6 col-md-3">
+            <div class="form-group form-focus">
+                <label class="focus-label">Employee Name</label>
+                <input type="text" class="form-control floating">
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="form-select2 form-focus select-focus">
+                <label class="focus-label">Select Month</label>
+                <select class="select2 form-select ">
+                    <option>-</option>
+                    <option>Jan</option>
+                    <option>Feb</option>
+                    <option>Mar</option>
+                    <option>Apr</option>
+                    <option>May</option>
+                    <option>Jun</option>
+                    <option>Jul</option>
+                    <option>Aug</option>
+                    <option>Sep</option>
+                    <option>Oct</option>
+                    <option>Nov</option>
+                    <option>Dec</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="form-select2 form-focus select-focus">
+                <label class="focus-label">Select Year</label>
+                <select class="select2 form-select ">
+                    <option>-</option>
+                    <option>2017</option>
+                    <option>2016</option>
+                    <option>2015</option>
+                    <option>2014</option>
+                    <option>2013</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <a href="#" class="btn btn-success btn-block"> Search </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                @{
+                    var today = DateTime.Now;
+                    var desiredMonth = new DateTime(today.Year, today.Month, 1);
+                    var filteredModel = Model
+                    .Where(a => a.attendance_date.Month == today.Month && a.attendance_date.Year == today.Year)
+                    .OrderBy(a => a.attendance_date)
+                    .ToList();
+                }
+
+                <table class="table table-striped custom-table mb-0">
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            @foreach (var date in filteredModel.Select(a => a.attendance_date).Distinct())
+                            {
+                                <th>@date.Day</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var employee in Model.DistinctBy(e => e.attendance_e_id))
+                        {
+                            <tr>
+                                <td>@employee.Employee?.Emp_full_name</td>
+
+                                @foreach (var date in filteredModel.Select(a => a.attendance_date).Distinct())
+                                {
+                                    var attendanceForDate = filteredModel.FirstOrDefault(a => a.attendance_e_id == employee.attendance_e_id && a.attendance_date == date);
+                                    <td>
+                                        @if (attendanceForDate != null)
+                                        {
+                                            <i class="ti ti-check text-success"></i>
+                                        }
+                                        else
+                                        {
+                                            <p class=" text-danger">X</p>
+                                        }
+                                        </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

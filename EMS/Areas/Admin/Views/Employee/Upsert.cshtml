@@ -1,0 +1,139 @@
+﻿@model EmployeeViewModel
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Employee @(Model.Employee.Id != 0 ? "Edit" : "Registration") Form</h5>
+                        <form asp-action="Upsert" method="post" class="my-4" enctype="multipart/form-data">
+                            <input asp-for="Employee.Id" hidden />
+                            <input asp-for="Employee.Emp_dp" hidden />
+                            <div class="text-danger mb-4"></div>
+                            <div class="row">
+                                @if (Model.Employee.Id != 0 ){
+                                <div class="col-md-4">
+                                    <h5 class="card-title fw-semibold mb-4"></h5>
+                                    <div class="card">
+                                        <img src="@Model.Employee.Emp_dp" class="card-img-top" alt="...">
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Employee.Emp_full_name" class="control-label"></label>
+                                        <input asp-for="Employee.Emp_full_name" class="form-control" />
+                                        <span asp-validation-for="Employee.Emp_full_name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Employee.Emp_Cid" class="control-label"></label>
+                                        <input asp-for="Employee.Emp_Cid" class="form-control" />
+                                        <span asp-validation-for="Employee.Emp_Cid" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="Employee.Emp_job_title_id" class="control-label"></label>
+                                        <select  asp-for="@Model.Employee.Emp_job_title_id" asp-items="@Model.JobTitleList" class="form-control">
+                                    <option disabled value="0">Select Job Title</option>
+                                        </select>
+                                        <span asp-validation-for="Employee.Emp_job_title_id" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                 <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="Employee.Emp_Gender_id" class="control-label"></label>
+                                        <select asp-for="@Model.Employee.Emp_Gender_id" asp-items="@Model.GenderList" class="form-control">
+                                                    <option disabled value="0">Select Gender</option>
+                                                </select>
+                                        <span asp-validation-for="Employee.Emp_Gender_id" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="Employee.Emp_Department_id" class="control-label"></label>
+                                        <select asp-for="@Model.Employee.Emp_Department_id" asp-items="@Model.DepartmentList" class="form-control">
+                                                    <option disabled value="0">Select Department</option>
+                                                </select>
+                                        <span asp-validation-for="Employee.Emp_Department_id" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Employee.Emp_NIC" class="control-label"></label>
+                                <input asp-for="Employee.Emp_NIC" class="form-control" />
+                                <span asp-validation-for="Employee.Emp_NIC" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label asp-for="Employee.Emp_DateOfBirth" class="control-label"></label>
+                                <input asp-for="Employee.Emp_DateOfBirth" type="date" class="form-control" />
+                                <span asp-validation-for="Employee.Emp_DateOfBirth" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label asp-for="Employee.Emp_start_date" class="control-label"></label>
+                                        <input asp-for="Employee.Emp_start_date" type="date" class="form-control" />
+                                        <span asp-validation-for="Employee.Emp_start_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label asp-for="Employee.Emp_contact_info" class="control-label"></label>
+                                        <input asp-for="Employee.Emp_contact_info" class="form-control" />
+                                        <span asp-validation-for="Employee.Emp_contact_info" class="text-danger"></span>
+                                    </div>
+                                </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Employee.Emp_Address" class="control-label"></label>
+                                <input asp-for="Employee.Emp_Address" class="form-control" />
+                                <span asp-validation-for="Employee.Emp_Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label asp-for="Employee.Emp_dp" class="control-label"></label>
+                                <input type="file" name="file"  class="form-control" />
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-1">
+                                    @if (Model.Employee.Id !=0)
+                            {
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            }
+
+                                </div>
+                                <div class="col-1">
+                                    <a asp-asp-controller="Employee" asp-action="Index" class="btn btn-secondary from-control">Back</a>
+                                </div>
+                            </div>
+                        </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

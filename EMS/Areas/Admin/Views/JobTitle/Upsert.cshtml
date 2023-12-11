@@ -1,0 +1,102 @@
+﻿@model JobTitleVM
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">JobTitle @(Model.JobTitle.Id != 0 ? "Edit" : "Registration") Form</h5>
+                <form asp-action="Upsert" method="post" class="my-4" enctype="multipart/form-data">
+                    <input asp-for="JobTitle.Id" hidden />
+                    <div class="text-danger mb-4"></div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="JobTitle.jt_name" class="control-label"></label>
+                                <input asp-for="JobTitle.jt_name" class="form-control" />
+                                <span asp-validation-for="JobTitle.jt_name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="JobTitle.BaseSalary" class="control-label"></label>
+                                <input asp-for="JobTitle.BaseSalary" id="BaseSalary" class="form-control" />
+                                <span asp-validation-for="JobTitle.BaseSalary" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="JobTitle.SalaryTypeID" class="control-label"></label>
+                                <select asp-for="@Model.JobTitle.SalaryTypeID" asp-items="@Model.SalaryTypeList" class="form-control">
+                                    <option disabled value="0">Select Job Title</option>
+                                </select>
+                                <span asp-validation-for="JobTitle.SalaryTypeID" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="JobTitle.EmpoyeeEPF" class="control-label"></label>
+                                    <input asp-for="JobTitle.EmpoyeeEPF" id="EmpoyeeEPF" class="form-control" readonly />
+                                    <span asp-validation-for="JobTitle.EmpoyeeEPF" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="JobTitle.EmpoyeerEPF" class="control-label"></label>
+                                    <input asp-for="JobTitle.EmpoyeerEPF" id="EmpoyeerEPF" class="form-control" readonly />
+                                    <span asp-validation-for="JobTitle.EmpoyeerEPF" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="JobTitle.EmpoyeerETF" class="control-label"></label>
+                                    <input asp-for="JobTitle.EmpoyeerETF" id="EmpoyeerETF" class="form-control" readonly />
+                                    <span asp-validation-for="JobTitle.EmpoyeerETF" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-1">
+                            @if (Model.JobTitle.Id != 0)
+                            {
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            }
+
+                        </div>
+                        <div class="col-1">
+                            <a asp-asp-controller="JobTitle" asp-action="Index" class="btn btn-secondary from-control">Back</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        $(document).ready(function () {
+            // Attach an event listener to the BaseSalary input field
+            $("#BaseSalary").on("input", function () {
+                // Calculate and update the values of EmpoyeeEPF, EmpoyeerEPF, and EmpoyeerETF
+                var baseSalary = parseFloat($(this).val()) || 0;
+
+                $("#EmpoyeeEPF").val((baseSalary * 0.08).toFixed(2));
+                $("#EmpoyeerEPF").val((baseSalary * 0.12).toFixed(2));
+                $("#EmpoyeerETF").val((baseSalary * 0.03).toFixed(2));
+            });
+        });
+    </script>
+}
