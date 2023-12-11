@@ -1,12 +1,15 @@
 ﻿using EMS.DataAccess.Repository.IRepository;
 using EMS.Models;
 using EMS.Models.ViewModels;
+using EMS.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EMSWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Accountant + "," + SD.Role_Assistant_Accountant + "," + SD.Role_Admin)]
     public class SalaryController : Controller
     {
         private readonly IUnitOfWorks _unitOfWorks;
@@ -52,6 +55,7 @@ namespace EMSWeb.Areas.Admin.Controllers
                 return View(empVM);
             }
         }
+        [Authorize(Roles = SD.Role_Accountant +", " + SD.Role_Admin)]
         [HttpPost]
         public IActionResult Upsert(PayRollVM payRollVM)
         {

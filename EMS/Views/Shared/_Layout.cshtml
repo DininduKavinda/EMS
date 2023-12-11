@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContexAccessor
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,211 +19,220 @@
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
          data-sidebar-position="fixed" data-header-position="fixed">
-        <!-- Sidebar Start -->
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div>
-                <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a href="./index.html" class="text-nowrap logo-img">
-                        <img src="~/images/logos/dark-logo.svg" width="180" alt="" />
-                    </a>
-                    <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-                        <i class="ti ti-x fs-8"></i>
+        @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Accountant) || User.IsInRole(SD.Role_Assistant_Accountant))
+        {
+            <!-- Sidebar Start -->
+            <aside class="left-sidebar">
+                <!-- Sidebar scroll-->
+                <div>
+                    <div class="brand-logo d-flex align-items-center justify-content-between">
+                        <a href="./index.html" class="text-nowrap logo-img">
+                            <img src="~/images/logos/dark-logo.svg" width="180" alt="" />
+                        </a>
+                        <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                            <i class="ti ti-x fs-8"></i>
+                        </div>
                     </div>
-                </div>
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-                    <ul id="sidebarnav">
-                        <li class="nav-small-cap">
-                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                            <span class="hide-menu">Home</span>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-layout-dashboard"></i>
-                                </span>
-                                <span class="hide-menu">Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="nav-small-cap">
-                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                            <span class="hide-menu">Attendence</span>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow"
-                               href="javascript:void(0)"
-                               aria-expanded="false">
-                                <span class="d-flex">
-                                    <i class="ti ti-basket"></i>
-                                </span>
-                                <span class="hide-menu">Attendance</span>
-                            </a>
-                            <ul aria-expanded="false" class="collapse first-level">
+                    <!-- Sidebar navigation-->
+                    <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                        <ul id="sidebarnav">
+                            <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                <span class="hide-menu">Home</span>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-layout-dashboard"></i>
+                                    </span>
+                                    <span class="hide-menu">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                <span class="hide-menu">Attendence</span>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link has-arrow"
+                                href="javascript:void(0)"
+                                aria-expanded="false">
+                                    <span class="d-flex">
+                                        <i class="ti ti-basket"></i>
+                                    </span>
+                                    <span class="hide-menu">Attendance</span>
+                                </a>
+                                <ul aria-expanded="false" class="collapse first-level">
 
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-area="Admin" asp-controller="Attendance" asp-action="TodayAttendance" aria-expanded="false">
-                                        <span>
-                                            <i class="ti ti-menu"></i>
-                                        </span>
-                                        <span class="hide-menu">Today Attendace</span>
-                                    </a>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-area="Admin" asp-controller="Attendance" asp-action="TodayAttendance" aria-expanded="false">
+                                            <span>
+                                                <i class="ti ti-menu"></i>
+                                            </span>
+                                            <span class="hide-menu">Today Attendace</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-area="Admin" asp-controller="Attendance" asp-action="MonthlyAttendance" aria-expanded="false">
+                                            <span>
+                                                <i class="ti ti-article"></i>
+                                            </span>
+                                            <span class="hide-menu">Month Attendace</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-area="Admin" asp-controller="Attendance" asp-action="Index" aria-expanded="false">
+                                            <span>
+                                                <i class="ti ti-alert-circle"></i>
+                                            </span>
+                                            <span class="hide-menu">All Attendence</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-area="Admin" asp-controller="Attendance" asp-action="Create" aria-expanded="false">
+                                            <span>
+                                                <i class="ti ti-cards"></i>
+                                            </span>
+                                            <span class="hide-menu">Insert Today</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                <span class="hide-menu">Leaves</span>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link has-arrow"
+                                href="javascript:void(0)"
+                                aria-expanded="false">
+                                    <span class="d-flex">
+                                        <i class="ti ti-basket"></i>
+                                    </span>
+                                    <span class="hide-menu">Leave Details</span>
+                                </a>
+                                <ul aria-expanded="false" class="collapse first-level">
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-area="Admin" asp-controller="Leave" asp-action="Upsert" aria-expanded="false">
+                                            <span>
+                                                <i class="ti ti-briefcase"></i>
+                                            </span>
+                                            <span class="hide-menu">Add Leave</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-area="Admin" asp-controller="Leave" asp-action="index" aria-expanded="false">
+                                            <span>
+                                                <i class="ti ti-bookmark"></i>
+                                            </span>
+                                            <span class="hide-menu">All Leaves</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Accountant))
+                            {
+                                <li class="nav-small-cap">
+                                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                    <span class="hide-menu">Meta Data</span>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-area="Admin" asp-controller="Attendance" asp-action="MonthlyAttendance" aria-expanded="false">
-                                        <span>
-                                            <i class="ti ti-article"></i>
+                                    <a class="sidebar-link has-arrow"
+                                    href="javascript:void(0)"
+                                    aria-expanded="false">
+                                        <span class="d-flex">
+                                            <i class="ti ti-basket"></i>
                                         </span>
-                                        <span class="hide-menu">Month Attendace</span>
+                                        <span class="hide-menu">Meta</span>
                                     </a>
+                                    <ul aria-expanded="false" class="collapse first-level">
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" asp-area="Admin" asp-controller="JobTitle" asp-action="Index" aria-expanded="false">
+                                                <span>
+                                                    <i class="ti ti-briefcase"></i>
+                                                </span>
+                                                <span class="hide-menu">Job Titles</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" asp-area="Admin" asp-controller="Salary" asp-action="Index" aria-expanded="false">
+                                                <span>
+                                                    <i class="ti ti-bookmark"></i>
+                                                </span>
+                                                <span class="hide-menu">Salary</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-area="Admin" asp-controller="Attendance" asp-action="Index" aria-expanded="false">
-                                        <span>
-                                            <i class="ti ti-alert-circle"></i>
-                                        </span>
-                                        <span class="hide-menu">All Attendence</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-area="Admin" asp-controller="Attendance" asp-action="Create" aria-expanded="false">
-                                        <span>
-                                            <i class="ti ti-cards"></i>
-                                        </span>
-                                        <span class="hide-menu">Insert Today</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-small-cap">
-                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                            <span class="hide-menu">Leaves</span>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow"
-                               href="javascript:void(0)"
-                               aria-expanded="false">
-                                <span class="d-flex">
-                                    <i class="ti ti-basket"></i>
-                                </span>
-                                <span class="hide-menu">Leave Details</span>
-                            </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-area="Admin" asp-controller="Leave" asp-action="Upsert" aria-expanded="false">
-                                        <span>
-                                            <i class="ti ti-briefcase"></i>
-                                        </span>
-                                        <span class="hide-menu">Add Leave</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-area="Admin" asp-controller="Leave" asp-action="index" aria-expanded="false">
-                                        <span>
-                                            <i class="ti ti-bookmark"></i>
-                                        </span>
-                                        <span class="hide-menu">All Leaves</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-small-cap">
-                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                            <span class="hide-menu">Meta Data</span>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow"
-                               href="javascript:void(0)"
-                               aria-expanded="false">
-                                <span class="d-flex">
-                                    <i class="ti ti-basket"></i>
-                                </span>
-                                <span class="hide-menu">Meta</span>
-                            </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-area="Admin" asp-controller="JobTitle" asp-action="Index" aria-expanded="false">
-                                        <span>
-                                            <i class="ti ti-briefcase"></i>
-                                        </span>
-                                        <span class="hide-menu">Job Titles</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-area="Admin" asp-controller="Salary" asp-action="Index" aria-expanded="false">
-                                        <span>
-                                            <i class="ti ti-bookmark"></i>
-                                        </span>
-                                        <span class="hide-menu">Salary</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-small-cap">
-                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                            <span class="hide-menu">PayRolls</span>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow"
-                               href="javascript:void(0)"
-                               aria-expanded="false">
-                                <span class="d-flex">
-                                    <i class="ti ti-basket"></i>
-                                </span>
+                            }
+
+                            <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                                 <span class="hide-menu">PayRolls</span>
-                            </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-area="Admin" asp-controller="PayRoll" asp-action="Index" aria-expanded="false">
-                                        <span>
-                                            <i class="ti ti-list"></i>
-                                        </span>
-                                        <span class="hide-menu">PayRoll Details</span>
-                                    </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link has-arrow"
+                                href="javascript:void(0)"
+                                aria-expanded="false">
+                                    <span class="d-flex">
+                                        <i class="ti ti-basket"></i>
+                                    </span>
+                                    <span class="hide-menu">PayRolls</span>
+                                </a>
+                                <ul aria-expanded="false" class="collapse first-level">
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-area="Admin" asp-controller="PayRoll" asp-action="Index" aria-expanded="false">
+                                            <span>
+                                                <i class="ti ti-list"></i>
+                                            </span>
+                                            <span class="hide-menu">PayRoll Details</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-area="Admin" asp-controller="Salary" asp-action="PreparingWages" aria-expanded="false">
+                                            <span>
+                                                <i class="ti ti-bookmark"></i>
+                                            </span>
+                                            <span class="hide-menu">Preparing Wages</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Accountant))
+                            {
+                                <li class="nav-small-cap">
+                                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                    <span class="hide-menu">Employee Mangement</span>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-area="Admin" asp-controller="Salary" asp-action="PreparingWages" aria-expanded="false">
-                                        <span>
-                                            <i class="ti ti-bookmark"></i>
+                                    <a class="sidebar-link has-arrow"
+                                    href="javascript:void(0)"
+                                    aria-expanded="false">
+                                        <span class="d-flex">
+                                            <i class="ti ti-basket"></i>
                                         </span>
-                                        <span class="hide-menu">Preparing Wages</span>
+                                        <span class="hide-menu">Employee Details</span>
                                     </a>
+                                    <ul aria-expanded="false" class="collapse first-level">
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" asp-area="Admin" asp-controller="Employee" asp-action="Upsert" aria-expanded="false">
+                                                <span>
+                                                    <i class="ti ti-list"></i>
+                                                </span>
+                                                <span class="hide-menu">Add New</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" asp-area="Admin" asp-controller="Employee" asp-action="Index" aria-expanded="false">
+                                                <span>
+                                                    <i class="ti ti-align-left"></i>
+                                                </span>
+                                                <span class="hide-menu">All Employees</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                            </ul>
-                        </li>
-                        <li class="nav-small-cap">
-                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                            <span class="hide-menu">Employee Mangement</span>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow"
-                               href="javascript:void(0)"
-                               aria-expanded="false">
-                                <span class="d-flex">
-                                    <i class="ti ti-basket"></i>
-                                </span>
-                                <span class="hide-menu">Employee Details</span>
-                            </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-area="Admin" asp-controller="Employee" asp-action="Upsert" aria-expanded="false">
-                                        <span>
-                                            <i class="ti ti-list"></i>
-                                        </span>
-                                        <span class="hide-menu">Add New</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-area="Admin" asp-controller="Employee" asp-action="Index" aria-expanded="false">
-                                        <span>
-                                            <i class="ti ti-align-left"></i>
-                                        </span>
-                                        <span class="hide-menu">All Employees</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-small-cap">
+                            }
+                            <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Authentication</span>
                         </li>
@@ -251,9 +262,12 @@
             </div>
             <!-- End Sidebar scroll-->
         </aside>
+        }
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
+            @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Accountant) || User.IsInRole(SD.Role_Assistant_Accountant))
+            {
             <!--  Header Start -->
             <header class="app-header">
                 <nav class="navbar navbar-expand-lg navbar-light">
@@ -297,10 +311,12 @@
                                 </div>
                             </li>
                         </ul>
+                  
                         <partial name="_loginPartial" />
                     </div>
                 </nav>
             </header>
+            }
             <!--  Header End -->
             <div class="container-fluid">
                 <main role="main" class="pb-3">

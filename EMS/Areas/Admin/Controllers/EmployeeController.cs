@@ -5,10 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using EMS.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EMPSystemWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Accountant + "," + SD.Role_Assistant_Accountant + "," + SD.Role_Admin)]
     public class EmployeeController : Controller
     {
         private readonly IUnitOfWorks _unitOfWorks;
@@ -23,6 +26,7 @@ namespace EMPSystemWeb.Areas.Admin.Controllers
             List<Employee> objEmployeeList = _unitOfWorks.Employee.GetAll(includeProperties:"JobTitle").ToList();
             return View(objEmployeeList);
         }
+        [Authorize(Roles = SD.Role_Accountant + ", " + SD.Role_Admin)]
         public IActionResult Upsert(int? id)
         {
             EmployeeViewModel employeeVM = new()
@@ -55,6 +59,7 @@ namespace EMPSystemWeb.Areas.Admin.Controllers
             }
             
         }
+        [Authorize(Roles = SD.Role_Accountant + ", " + SD.Role_Admin)]
         [HttpPost]
         public IActionResult Upsert(EmployeeViewModel employeeVM, IFormFile? file)
         {
@@ -119,6 +124,7 @@ namespace EMPSystemWeb.Areas.Admin.Controllers
             List<Employee> objEmployeeList = _unitOfWorks.Employee.GetAll(includeProperties: "JobTitle,Department,Gender,JobTitle.SalaryType").ToList();
             return Json(new { data = objEmployeeList });
         }
+        [Authorize(Roles = SD.Role_Admin)]
         [HttpDelete]
         public IActionResult Delete(int? id)
         {

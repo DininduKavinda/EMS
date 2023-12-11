@@ -526,6 +526,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EMS.DataAceess\EMS.DataAceess.csproj" />
+    <ProjectReference Include="..\EMS.Utility\EMS.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>
