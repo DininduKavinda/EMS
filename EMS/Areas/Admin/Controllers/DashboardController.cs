@@ -2,18 +2,21 @@
 using EMS.Models;
 using EMS.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EMSWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Accountant + "," + SD.Role_Assistant_Accountant + "," + SD.Role_Admin)]
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly IUnitOfWorks _unitOfWorks;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public DashboardController(IUnitOfWorks unitOfWorks, IWebHostEnvironment webHostEnvironment)
+        private readonly UserManager<IdentityUser> _userManager;
+        public DashboardController(IUnitOfWorks unitOfWorks, IWebHostEnvironment webHostEnvironment, UserManager<IdentityUser> userManager)
         {
+            _userManager = userManager;
             _unitOfWorks = unitOfWorks;
             _webHostEnvironment = webHostEnvironment;
         }

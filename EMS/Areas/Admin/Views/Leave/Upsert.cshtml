@@ -11,7 +11,7 @@
                          @if (Model.Leave.Id != 0)
                                 {
                         <div class="col-md-4">
-                            <h5 class="card-title fw-semibold mb-4"></h5>
+                            <h5 class="card-title fw-semibold mb-4"></h5> 
                             <div class="card">
                                     <img src="@Model.Leave.Employee.Emp_dp" class="card-img-top" alt="...">
                             </div>
@@ -128,7 +128,7 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label asp-for="Leave.Leave_Approved_by" class="control-label"></label>
-                                    <input asp-for="Leave.Leave_Approved_by" class="form-control" />
+                                    <input asp-for="Leave.Leave_Approved_by" value="" class="form-control" />
                                     <input hidden type="date" asp-for="Leave.Leave_Apply_Date" value="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control" />
                                     <span asp-validation-for="Leave.Leave_Approved_by" class="text-danger"></span>
 

@@ -20,7 +20,7 @@ namespace EMS.DataAccess.Repository
             _db = db;
             this.dbSet = _db.Set<T>();
             //_db.Categories == dbSet;
-            _db.Employees.Include(u => u.JobTitle).Include(u=>u.Department).Include(u => u.Gender).Include(u=>u.JobTitle.SalaryType);
+            _db.Employees.Include(u => u.JobTitle).Include(u=>u.Department).Include(u => u.Gender).Include(u =>u.JobTitle.SalaryType);
             _db.Attendances.Include(u => u.Employee);
             _db.Leaves.Include(u => u.Employee).Include(u => u.LeaveType);
             _db.JobTitles.Include(u => u.SalaryType);

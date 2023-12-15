@@ -18,6 +18,12 @@
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
+                <select asp-for="Input.User_Employee_Id" class="form-select" asp-items="@Model.Input.EmployeeList">
+                    <option disabled selected>- Select Employee -</option>
+                </select>
+                <label asp-for="Input.User_Employee_Id">Select Employee</label>
+            </div>
+            <div class="form-floating mb-3">
                 <select asp-for="Input.Role" class="form-select" asp-items="@Model.Input.RoleList">
                     <option disabled selected>- Select Role -</option>
                 </select>

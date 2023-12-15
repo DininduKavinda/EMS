@@ -14,20 +14,29 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using EMS.Models;
+using Microsoft.Extensions.Configuration.UserSecrets;
+using EMS.Utility;
+using EMS.DataAccess.Repository.IRepository;
+using EMS.DataAccess.Repository;
+using System.Security.Claims;
 
 namespace EMS.Web.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IUnitOfWorks _unitOfWorks;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, UserManager<IdentityUser> userManager, IUnitOfWorks unitOfWorks)
         {
+            _unitOfWorks = unitOfWorks;
             _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
-
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -101,10 +110,10 @@ namespace EMS.Web.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(ApplicationUser applicationUser,string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-
+           
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
@@ -115,6 +124,17 @@ namespace EMS.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var calimsIdentity = (ClaimsIdentity)User.Identity;
+                    var userID = calimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    HttpContext.Session.SetString(SD.SessionUserId, userID);
+                    applicationUser = await _userManager.FindByNameAsync(userID);
+                    if (applicationUser != null)
+                    {
+                        int ID = applicationUser.User_Employee_Id;
+                    }
+
+
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

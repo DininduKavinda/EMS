@@ -26,6 +26,7 @@ namespace EMS.DataAccess.Data
         public DbSet<Department> Departments { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<PayRoll> PayRolls { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

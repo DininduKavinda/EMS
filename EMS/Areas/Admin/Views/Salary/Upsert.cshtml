@@ -1,4 +1,7 @@
-﻿@model EmployeeViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@model EmployeeViewModel
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 <div class="container-fluid">
     <div class="container-fluid">
         <div class="card">
@@ -40,7 +43,7 @@
                                         <td>@Model.Employee.Gender.GenderName</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Department:</strong></td>
+                                        <td><strong>Department:</strong> </td>
                                         <td>@Model.Employee.Department.Department_Name</td>
                                     </tr>
                                     <tr>
@@ -146,7 +149,7 @@
                             </td>
                             <td>
                                 <input asp-for="PayRoll.CreatedBy" class="form-control" />
-                                <span asp-validation-for="PayRoll.CreatedBy" class="text-danger"></span>
+                                <span asp-validation-for="PayRoll.CreatedBy" value="@UserManager.GetUserName(User)" class="text-danger"></span>
                             </td>
                         </tr>
                         <tr>

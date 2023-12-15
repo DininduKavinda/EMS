@@ -6,6 +6,8 @@
         public const string Role_Accountant = "Accountant";
         public const string Role_Assistant_Accountant = "Assistant Accountant";
 
-        public const string SessionUser = "UserSession";
+        public const string SessionUserName = "UserSessionName";
+        public const string SessionUserId = "UserSessionId";
+        public const string SessionEmpoloyeeName = "UserSessionEmployeeName";
     }
 }
