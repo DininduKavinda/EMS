@@ -126,15 +126,10 @@ namespace EMS.Web.Areas.Identity.Pages.Account
                     _logger.LogInformation("User logged in.");
                     var calimsIdentity = (ClaimsIdentity)User.Identity;
                     var userID = calimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-                    HttpContext.Session.SetString(SD.SessionUserId, userID);
-                    applicationUser = await _userManager.FindByNameAsync(userID);
-                    if (applicationUser != null)
-                    {
-                        int ID = applicationUser.User_Employee_Id;
-                    }
-
-
-
+                    var userEmpId = applicationUser.Employee.Emp_full_name;
+                    HttpContext.Session.SetString(SD.SessionEmpoloyeeName, _unitOfWorks.Employee.Get(u => u.Id == ));
+                    HttpContext.Session.SetString(SD.SessionEmpoloyeeName, userEmpId);
+                    
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

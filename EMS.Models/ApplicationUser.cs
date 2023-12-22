@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,10 +13,9 @@ namespace EMS.Models
 {
     public class ApplicationUser:IdentityUser
     {
-        [Required]
         [DisplayName("Employee Name")]
         public int User_Employee_Id { get; set; }
         [ForeignKey("User_Employee_Id")]
-        public Employee Employee { get; set; }
+        public Employee? Employee { get; set; }
     }
 }
