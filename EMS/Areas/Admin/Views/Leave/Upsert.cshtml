@@ -3,17 +3,17 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Leave Leave @(Model.Leave.Id != 0 ? "Approval" : "Application") Form</h5>
+                <h5 class="card-title fw-semibold mb-4">Leave @(Model.Leave.Id != 0 ? "Approval" : "Application") Form</h5>
                <form asp-action="Upsert" method="post" class="my-4" >
                     <input asp-for="Leave.Id" hidden />                
                     <div class="text-danger mb-4"></div>
                     <div class="row">
-                         @if (Model.Leave.Id != 0)
+                        @if (Model.Leave != null && Model.Leave.Employee != null)
                                 {
                         <div class="col-md-4">
                             <h5 class="card-title fw-semibold mb-4"></h5> 
                             <div class="card">
-                                    <img src="@Model.Leave.Employee.Emp_dp" class="card-img-top" alt="...">
+                                    <img src="@Model.Leave?.Employee?.Emp_dp? " class="card-img-top" alt="...">
                             </div>
                         </div>
                                }
@@ -22,17 +22,10 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="Leave.Employees_Id" class="control-label"></label>
-                                @if (Model.Leave.Id != 0)
-                                {
-                                    <input disabled asp-for="@Model.Leave.Employee.Emp_full_name" class="form-control" />
-                                }
-                                else
-                                {
                                     <select asp-for="Leave.Employees_Id" asp-items="@Model.EmployeeList" class="select2 form-select ">
                                         <option disabled value="0">Select Name</option>
                                     </select>
                                     <span asp-validation-for="Leave.Employees_Id" class="text-danger"></span>                              
-                                }
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -57,31 +50,19 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="Leave.Leave_Type_Id" class="control-label"></label>
-                                @if (Model.Leave.Id != 0)
-                                {
-                                    <input disabled asp-for="Leave.LeaveType.Leave_Type_Name" class="form-control" />
-                                }
-                                else
-                                {
+
                                     <select asp-for="Leave.Leave_Type_Id" asp-items="@Model.LeaveTypeList" class="select2 form-select">
                                         <option disabled value="0">Select Leave Reason</option>
                                     </select>
                                     <span asp-validation-for="Leave.Leave_Type_Id" class="text-danger"></span>
-                                }
-                               
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="Leave.Leave_Description" class="control-label"></label>
-                                @if (Model.Leave.Id != 0)
-                                {
-                                    <textarea disabled asp-for="Leave.Leave_Description" class="form-control"></textarea>
-                                }
-                                else
-                                {
+                                
                                     <textarea asp-for="Leave.Leave_Description" class="form-control" ></textarea>
-                                }
+                                
                                 <span asp-validation-for="Leave.Leave_Description" class="text-danger"></span>
                             </div>
                         </div>
@@ -91,28 +72,15 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label asp-for="Leave.Leave_Acommencement_Date" class="control-label"></label>
-                                 @if (Model.Leave.Id != 0)
-                                {
-                                    <input disabled type="date" asp-for="Leave.Leave_Acommencement_Date" class="form-control" />
-                                }
-                                else
-                                {
                                 <input type="date" asp-for="Leave.Leave_Acommencement_Date" class="form-control" />
                                 <span asp-validation-for="Leave.Leave_Acommencement_Date" class="text-danger"></span>
-                                }
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label asp-for="Leave.Leave_Return_Date" class="control-label"></label>
-                                  @if (Model.Leave.Id != 0)
-                                {
-                                    <input disabled type="date" asp-for="Leave.Leave_Return_Date" class="form-control" />
-                                }
-                                else
-                                {
                                 <input type="date" asp-for="Leave.Leave_Return_Date" class="form-control" />
-                                }
+                  
                                 <span asp-validation-for="Leave.Leave_Return_Date" class="text-danger"></span>
                             </div>
                         </div>
@@ -128,7 +96,9 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label asp-for="Leave.Leave_Approved_by" class="control-label"></label>
-                                    <input asp-for="Leave.Leave_Approved_by" value="" class="form-control" />
+                                    <br/>
+                                    <p>@HttpContextAccessor.HttpContext.Session.GetString(SD.SessionEmpoloyeeName)</p>
+                                    <input hidden asp-for="Leave.Leave_Approved_by" value="@HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionUserId)" class="form-control" />
                                     <input hidden type="date" asp-for="Leave.Leave_Apply_Date" value="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control" />
                                     <span asp-validation-for="Leave.Leave_Approved_by" class="text-danger"></span>
 

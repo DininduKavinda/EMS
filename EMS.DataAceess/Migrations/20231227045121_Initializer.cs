@@ -134,6 +134,7 @@ namespace EMS.DataAceess.Migrations
                     Emp_Cid = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Emp_job_title_id = table.Column<int>(type: "int", nullable: false),
                     Emp_Department_id = table.Column<int>(type: "int", nullable: false),
+                    Emp_Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Emp_NIC = table.Column<int>(type: "int", nullable: false),
                     Emp_DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Emp_Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -434,24 +435,24 @@ namespace EMS.DataAceess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Employees",
-                columns: new[] { "Id", "Emp_Address", "Emp_Cid", "Emp_DateOfBirth", "Emp_Department_id", "Emp_Gender_id", "Emp_Is_active", "Emp_NIC", "Emp_contact_info", "Emp_dp", "Emp_full_name", "Emp_job_title_id", "Emp_start_date" },
+                columns: new[] { "Id", "Emp_Address", "Emp_Cid", "Emp_DateOfBirth", "Emp_Department_id", "Emp_Email", "Emp_Gender_id", "Emp_Is_active", "Emp_NIC", "Emp_contact_info", "Emp_dp", "Emp_full_name", "Emp_job_title_id", "Emp_start_date" },
                 values: new object[,]
                 {
-                    { 1, "20403 Bunker Hill Lane", "509280", new DateTime(1972, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, 1, 654654646, "190-481-6403", "Crimson", "Jeanie Norrie", 7, new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, "05080 Village Place", "583367", new DateTime(1973, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 1, 1, 654654646, "231-972-7579", "Red", "Arabele Millwater", 7, new DateTime(2016, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, "81 Carioca Lane", "751033", new DateTime(1971, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2, 1, 654654646, "299-264-5583", "Mauv", "Karen Solomon", 1, new DateTime(2012, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, "94 Towne Avenue", "239178", new DateTime(1966, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 1, 2, 654654646, "496-189-7339", "Blue", "Seamus Yeoman", 6, new DateTime(2012, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, "59664 Gina Crossing", "663442", new DateTime(1988, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 1, 1, 654654646, "260-523-1239", "Goldenrod", "Vincenty Frankcombe", 10, new DateTime(2021, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, "9979 Vernon Street", "723826", new DateTime(1992, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 1, 2, 654654646, "773-437-6039", "Fuscia", "Tybalt Alldridge", 8, new DateTime(2013, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 7, "0 7th Place", "332886", new DateTime(1971, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 1, 2, 654654646, "250-398-3300", "Puce", "Amye Adcock", 4, new DateTime(2017, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 8, "92 Pawling Alley", "681434", new DateTime(1988, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 2, 654654646, "752-372-2010", "Aquamarine", "Frasier Shrigley", 2, new DateTime(2021, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 9, "63 Manley Terrace", "857369", new DateTime(1983, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 2, 2, 654654646, "512-765-9897", "Red", "Magda Spraberry", 4, new DateTime(2021, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 10, "9 Caliangt Pass", "637020", new DateTime(1961, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, 1, 654654646, "426-464-2982", "Purple", "Maressa Gheorghe", 10, new DateTime(2019, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 11, "114 Bonner Center", "685841", new DateTime(1967, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, 2, 654654646, "100-113-6495", "Fuscia", "Bambie Selbie", 6, new DateTime(2017, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 12, "0658 Artisan Drive", "728440", new DateTime(1965, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, 1, 654654646, "850-277-8474", "Aquamarine", "Darwin Callington", 8, new DateTime(2021, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 13, "2305 Stuart Drive", "672909", new DateTime(1998, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 1, 1, 654654646, "255-334-1273", "Yellow", "Basilio Longhi", 8, new DateTime(2021, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 14, "574 Gulseth Crossing", "275978", new DateTime(1983, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 1, 1, 654654646, "157-963-7726", "Violet", "Hewet Sorrell", 1, new DateTime(2016, 12, 29, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 15, "06 Mayfield Junction", "466923", new DateTime(1964, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 1, 654654646, "831-374-8100", "Violet", "Dorothea Cantera", 9, new DateTime(2015, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, "20403 Bunker Hill Lane", "509280", new DateTime(1972, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, 2, 1, 654654646, "190-481-6403", "Crimson", "Jeanie Norrie", 7, new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "05080 Village Place", "583367", new DateTime(1973, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, null, 1, 1, 654654646, "231-972-7579", "Red", "Arabele Millwater", 7, new DateTime(2016, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, "81 Carioca Lane", "751033", new DateTime(1971, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, null, 2, 1, 654654646, "299-264-5583", "Mauv", "Karen Solomon", 1, new DateTime(2012, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, "94 Towne Avenue", "239178", new DateTime(1966, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, null, 1, 2, 654654646, "496-189-7339", "Blue", "Seamus Yeoman", 6, new DateTime(2012, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, "59664 Gina Crossing", "663442", new DateTime(1988, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, null, 1, 1, 654654646, "260-523-1239", "Goldenrod", "Vincenty Frankcombe", 10, new DateTime(2021, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, "9979 Vernon Street", "723826", new DateTime(1992, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, null, 1, 2, 654654646, "773-437-6039", "Fuscia", "Tybalt Alldridge", 8, new DateTime(2013, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 7, "0 7th Place", "332886", new DateTime(1971, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, null, 1, 2, 654654646, "250-398-3300", "Puce", "Amye Adcock", 4, new DateTime(2017, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 8, "92 Pawling Alley", "681434", new DateTime(1988, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, 2, 654654646, "752-372-2010", "Aquamarine", "Frasier Shrigley", 2, new DateTime(2021, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 9, "63 Manley Terrace", "857369", new DateTime(1983, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, null, 2, 2, 654654646, "512-765-9897", "Red", "Magda Spraberry", 4, new DateTime(2021, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 10, "9 Caliangt Pass", "637020", new DateTime(1961, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, 1, 1, 654654646, "426-464-2982", "Purple", "Maressa Gheorghe", 10, new DateTime(2019, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 11, "114 Bonner Center", "685841", new DateTime(1967, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, 1, 2, 654654646, "100-113-6495", "Fuscia", "Bambie Selbie", 6, new DateTime(2017, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 12, "0658 Artisan Drive", "728440", new DateTime(1965, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, 2, 1, 654654646, "850-277-8474", "Aquamarine", "Darwin Callington", 8, new DateTime(2021, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 13, "2305 Stuart Drive", "672909", new DateTime(1998, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, null, 1, 1, 654654646, "255-334-1273", "Yellow", "Basilio Longhi", 8, new DateTime(2021, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 14, "574 Gulseth Crossing", "275978", new DateTime(1983, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, null, 1, 1, 654654646, "157-963-7726", "Violet", "Hewet Sorrell", 1, new DateTime(2016, 12, 29, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 15, "06 Mayfield Junction", "466923", new DateTime(1964, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, 1, 654654646, "831-374-8100", "Violet", "Dorothea Cantera", 9, new DateTime(2015, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.CreateIndex(

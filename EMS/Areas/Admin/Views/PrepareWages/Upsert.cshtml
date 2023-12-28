@@ -70,7 +70,7 @@
                             </table>
                         </div>
                     </div>
-                   
+
 
 
 
@@ -158,7 +158,7 @@
                             </td>
                             <td>
                                 <input readonly placeholder="@HttpContextAccessor.HttpContext.Session.GetString(SD.SessionEmpoloyeeName)" class="form-control" />
-                                <input asp-for="PayRoll.CreatedBy" hidden  value="@HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionUserId)" class="form-control" />
+                                <input asp-for="PayRoll.CreatedBy" hidden value="@HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionUserId)" class="form-control" />
                                 <span asp-validation-for="PayRoll.CreatedBy" class="text-danger"></span>
                             </td>
                         </tr>
@@ -207,9 +207,9 @@
         </div>
     </div>
 </div>
-@section Scripts{
+@section Scripts {
     @{
-                    <partial name="_ValidationScriptsPartial" />
+        <partial name="_ValidationScriptsPartial" />
     }
     <script>
         $(document).ready(function () {
@@ -224,8 +224,7 @@
                 if (salaryType == 1) {
                     workDays = workDays;
                 }
-                else 
-                {
+                else {
                     workDays = 1;
                 }
                 // Calculate NetSalary
@@ -236,7 +235,7 @@
             }
 
             // Attach event listeners to relevant input fields
-        $("#PayRoll_Allowances, #PayRoll_Advanced, #PayRoll_NetBasicSalary, #salaryTypeId , #workDaysInput").on("input", updateNetSalary);
+            $("#PayRoll_Allowances, #PayRoll_Advanced, #PayRoll_NetBasicSalary, #salaryTypeId , #workDaysInput").on("input", updateNetSalary);
         });
     </script>
 }

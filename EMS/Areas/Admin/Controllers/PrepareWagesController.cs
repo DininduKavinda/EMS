@@ -6,15 +6,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace EMSWeb.Areas.Admin.Controllers
+namespace EMS.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Accountant  + "," + SD.Role_Admin)]
-    public class PayRollController : Controller
-    {
+    [Authorize(Roles = SD.Role_Accountant + "," + SD.Role_Admin)]
+    public class PrepareWagesController : Controller
+    {    
         private readonly IUnitOfWorks _unitOfWorks;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public PayRollController(IUnitOfWorks unitOfWorks, IWebHostEnvironment webHostEnvironment)
+        public PrepareWagesController(IUnitOfWorks unitOfWorks, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWorks = unitOfWorks;
             _webHostEnvironment = webHostEnvironment;
@@ -23,7 +23,7 @@ namespace EMSWeb.Areas.Admin.Controllers
         {
             return View();
         }
-       public IActionResult Upsert(int? id, PayRoll payRoll)
+        public IActionResult Upsert(int? id, PayRoll payRoll)
         {
             payRoll = _unitOfWorks.PayRoll.Get(u => u.Id == id);
             return View(payRoll);

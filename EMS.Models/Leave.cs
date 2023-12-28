@@ -31,8 +31,11 @@ namespace EMS.Models
         [Required]
         [DisplayName("Return Date")]
         public DateTime? Leave_Return_Date { get; set; }
+        [DisplayName("Number Of Days")]
         public int Number_of_Days { get; set; }
+        [DisplayName("Approved By")]
         public int Leave_Approved_by { get; set; }
+        [DisplayName("Approved Date")]
         public DateTime? Leave_Approved_Date { get; set; }
         [ForeignKey("Employees_Id")]
         public Employee? Employee { get; set; }

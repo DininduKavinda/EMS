@@ -6,7 +6,7 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": {
-            url: '/admin/payroll/getAll',
+            url: '/admin/prepareWages/getAll',
             dataSrc: 'data'
         },
         columns: [
@@ -59,13 +59,12 @@ function loadDataTable() {
             { data: 'payRoll.advanced' },
             { data: 'payRoll.allowances' },
             { data: 'payRoll.netSalary' },
-            { data: 'payRoll.payedDate' },
             {
                 data: 'payroll.id',
                 render: function (data) {
                     return `
                     <div class="w-75 btn-group" role="group">
-                    <a href="/admin/payroll/upsert?id=${data}" class="btn btn-info mx-2">Payments</a>
+                    <a href="/admin/preparewages/upsert?id=${data}" class="btn btn-warning mx-2">Approve</a>
                     </div>`;
                 }
             }

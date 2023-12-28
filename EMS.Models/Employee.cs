@@ -26,7 +26,8 @@ namespace EMS.Models
         [Required]
         [DisplayName("Department")]
         public int Emp_Department_id { get; set; }
-        [Required]
+        [DisplayName("Email")]
+        public string? Emp_Email { get; set; }
         [DisplayName("NIC")]
         public int Emp_NIC { get; set; }
         [Required]

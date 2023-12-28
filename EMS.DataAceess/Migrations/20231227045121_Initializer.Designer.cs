@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EMS.DataAceess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231215041758_Initializer")]
+    [Migration("20231227045121_Initializer")]
     partial class Initializer
     {
         /// <inheritdoc />
@@ -148,6 +148,9 @@ namespace EMS.DataAceess.Migrations
 
                     b.Property<int>("Emp_Department_id")
                         .HasColumnType("int");
+
+                    b.Property<string>("Emp_Email")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Emp_Gender_id")
                         .HasColumnType("int");

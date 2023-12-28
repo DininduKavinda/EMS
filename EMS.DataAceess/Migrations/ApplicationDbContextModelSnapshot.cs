@@ -146,6 +146,9 @@ namespace EMS.DataAceess.Migrations
                     b.Property<int>("Emp_Department_id")
                         .HasColumnType("int");
 
+                    b.Property<string>("Emp_Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Emp_Gender_id")
                         .HasColumnType("int");
 

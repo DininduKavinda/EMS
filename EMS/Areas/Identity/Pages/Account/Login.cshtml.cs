@@ -20,6 +20,7 @@ using EMS.Utility;
 using EMS.DataAccess.Repository.IRepository;
 using EMS.DataAccess.Repository;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace EMS.Web.Areas.Identity.Pages.Account
 {
@@ -110,7 +111,7 @@ namespace EMS.Web.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
-        public async Task<IActionResult> OnPostAsync(ApplicationUser applicationUser,string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
            
@@ -124,11 +125,10 @@ namespace EMS.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    var calimsIdentity = (ClaimsIdentity)User.Identity;
-                    var userID = calimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-                    var userEmpId = applicationUser.Employee.Emp_full_name;
-                    HttpContext.Session.SetString(SD.SessionEmpoloyeeName, _unitOfWorks.Employee.Get(u => u.Id == ));
-                    HttpContext.Session.SetString(SD.SessionEmpoloyeeName, userEmpId);
+                    var userEmail = User.Identity.Name;
+                    var employee = _unitOfWorks.Employee.Get(u=>u.Emp_Email == userEmail.ToLower());
+                    HttpContext.Session.SetInt32(SD.SessionUserId, employee.Id);
+                    HttpContext.Session.SetString(SD.SessionEmpoloyeeName, employee.Emp_full_name);
                     
                     return LocalRedirect(returnUrl);
                 }
