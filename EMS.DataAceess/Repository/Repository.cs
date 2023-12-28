@@ -24,6 +24,7 @@ namespace EMS.DataAccess.Repository
             _db.Attendances.Include(u => u.Employee);
             _db.Leaves.Include(u => u.Employee).Include(u => u.LeaveType);
             _db.JobTitles.Include(u => u.SalaryType);
+            _db.PayRolls.Include(u => u.Employee).Include(u => u.Employee.JobTitle).Include(u => u.Employee.Department).Include(u => u.Employee.Gender).Include(u => u.Employee.JobTitle.SalaryType);
         }
         public void Add(T entity)
         {
@@ -45,9 +46,13 @@ namespace EMS.DataAccess.Repository
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll(string? includeProperties =null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, string? includeProperties =null)
         {
             IQueryable<T> query = dbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter).AsQueryable();
+            }
             if (!string.IsNullOrEmpty(includeProperties))
             {
                 foreach (var includeProp in includeProperties.Split(new char[] {','},StringSplitOptions.RemoveEmptyEntries))

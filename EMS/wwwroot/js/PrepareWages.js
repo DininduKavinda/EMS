@@ -17,37 +17,12 @@ function loadDataTable() {
             { data: 'employee.jobTitle.jt_name' },
             { data: 'employee.jobTitle.baseSalary' },
             { data: 'employee.jobTitle.empoyeeEPF' },
-            {
-                data: null,
-                render: function (data, type, row) {
-                    var workDays = row.payRoll ? row.payRoll.workDays : null;
-
-                    if (workDays != null) {
-                        return workDays;
-                    } else {
-                        // Get the current date
-                        var currentDate = new Date();
-
-                        // Calculate the first day of the current month
-                        var firstDayOfCurrentMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-
-                        // Filter the attendanceList for records in the past month
-                        var attendanceListPastMonth = row.attendanceList.filter(function (attendance) {
-                            // Assuming attendance_date is a string in the format 'YYYY-MM-DD'
-                            var attendanceDate = new Date(attendance.attendance_date);
-                            return attendanceDate >= firstDayOfCurrentMonth;
-                        });
-
-                        // Return the count of attendance records for the past month
-                        return attendanceListPastMonth.length;
-                    }
-                }
-            },
+            { data: 'workDays' },
             {
                 data: null,
                 render: function (data, type, row) {
                     if (row.employee.jobTitle.salaryTypeID === 1) {
-                        var epfSum = row.employee.jobTitle.baseSalary * row.attendanceList.length;
+                        var epfSum = row.employee.jobTitle.baseSalary * row.workDays;
                         return epfSum;
                     } else {
                         var epfSum = row.employee.jobTitle.baseSalary - row.employee.jobTitle.empoyeeEPF;
@@ -56,16 +31,18 @@ function loadDataTable() {
                 },
             },
 
-            { data: 'payRoll.advanced' },
-            { data: 'payRoll.allowances' },
-            { data: 'payRoll.netSalary' },
+            { data: 'advanced' },
+            { data: 'allowances' },
+            { data: 'netSalary' },
             {
-                data: 'payroll.id',
-                render: function (data) {
+                data: 'id',
+                render: function (data, type, row) {
                     return `
-                    <div class="w-75 btn-group" role="group">
-                    <a href="/admin/preparewages/upsert?id=${data}" class="btn btn-warning mx-2">Approve</a>
-                    </div>`;
+                        <div class="w-75 btn-group" role="group">
+                            <a href="/admin/prepareWages/upsert?id=${data}" class="btn btn-warning mx-2">
+                            Approve || Edit
+                            </a>
+                        </div>`;
                 }
             }
         ]

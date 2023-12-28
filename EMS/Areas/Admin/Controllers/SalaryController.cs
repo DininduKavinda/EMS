@@ -87,24 +87,35 @@ namespace EMSWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
+            DateTime currentMonthStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime currentMonthEnd = currentMonthStart.AddMonths(1).AddDays(-1);
+
             List<Attendance> attendanceList = _unitOfWorks.Attendance.GetAll(includeProperties: "Employee").ToList();
             List<PayRoll> payRollList = _unitOfWorks.PayRoll.GetAll().ToList();
             List<Employee> empList = _unitOfWorks.Employee.GetAll(includeProperties: "JobTitle,Department,Gender,JobTitle.SalaryType").ToList();
+
             var combinedDataList = new List<object>();
+
             foreach (var employee in empList)
             {
-                var combinedData = new
+                bool hasPayrollData = payRollList.Any(a => a.EmployeeID == employee.Id &&
+                                                           a.PraperedDate >= currentMonthStart &&
+                                                           a.PraperedDate <= currentMonthEnd);
+                if (!hasPayrollData)
                 {
-                    Employee = employee,
-                    AttendanceList = attendanceList.Where(a => a.attendance_e_id == employee.Id).ToList(),
-                    PayRollList = payRollList.Where(a => a.EmployeeID == employee.Id).ToList()
-                };
+                    var combinedData = new
+                    {
+                        Employee = employee,
+                        AttendanceList = attendanceList.Where(a => a.attendance_e_id == employee.Id).ToList(),
+                    };
 
-
-                combinedDataList.Add(combinedData);
+                    combinedDataList.Add(combinedData);
+                }
             }
+
             return Json(new { data = combinedDataList });
         }
+
         #endregion
     }
 }

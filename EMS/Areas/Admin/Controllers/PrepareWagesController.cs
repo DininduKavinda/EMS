@@ -5,6 +5,7 @@ using EMS.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Permissions;
 
 namespace EMS.Web.Areas.Admin.Controllers
 {
@@ -23,46 +24,60 @@ namespace EMS.Web.Areas.Admin.Controllers
         {
             return View();
         }
-        public IActionResult Upsert(int? id, PayRoll payRoll)
+        public IActionResult Upsert(int id)
         {
-            payRoll = _unitOfWorks.PayRoll.Get(u => u.Id == id);
-            return View(payRoll);
+            PayRollVM payRollVM = new()
+            {
+                EmployeeList = _unitOfWorks.Employee.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Emp_full_name,
+                    Value = u.Id.ToString()
+                }),
+                PayRoll = new PayRoll(),
+            };
+            payRollVM.PayRoll = _unitOfWorks.PayRoll.Get(u => u.Id == id , includeProperties: "Employee,Employee.JobTitle,Employee.Department,Employee.Gender,Employee.JobTitle.SalaryType");
+            payRollVM.Employee = _unitOfWorks.Employee.Get(u => u.Id == payRollVM.PayRoll.CreatedBy);
+            return View(payRollVM);
+        }
+        [Authorize(Roles = SD.Role_Accountant + ", " + SD.Role_Admin)]
+        [HttpPost]
+        public IActionResult Upsert(PayRollVM payRollVM)
+        {
+            if (ModelState.IsValid)
+            {
+                if (payRollVM.PayRoll.Id == 0)
+                {
+                    _unitOfWorks.PayRoll.Add(payRollVM.PayRoll);
+                }
+                else
+                {
+                    _unitOfWorks.PayRoll.Update(payRollVM.PayRoll);
+                }
+                _unitOfWorks.Save();
+                TempData["success"] = "Update Successfully";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
         #region API CALLS
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Attendance> attendanceList = _unitOfWorks.Attendance.GetAll(includeProperties: "Employee").ToList();
-            List<PayRoll> payRollList = _unitOfWorks.PayRoll.GetAll().ToList();
-            List<Employee> employeeList = _unitOfWorks.Employee.GetAll(includeProperties: "JobTitle,Department,Gender,JobTitle.SalaryType").ToList();
+            DateTime currentMonthStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime currentMonthEnd = currentMonthStart.AddMonths(1).AddDays(-1);
 
-            var combinedDataList = new List<object>();
+            List<PayRoll> objPayRollList = _unitOfWorks.PayRoll
+                .GetAll(
+                    filter: a => a.PraperedDate >= currentMonthStart && a.PraperedDate <= currentMonthEnd && a.ApprovedBy == 0,
+                    includeProperties: "Employee,Employee.JobTitle,Employee.Department,Employee.Gender,Employee.JobTitle.SalaryType"
+                )
+                .ToList();
 
-            foreach (var payroll in payRollList)
-            {
-                // Find the corresponding employee for the payroll
-                var employee = employeeList.FirstOrDefault(e => e.Id == payroll.EmployeeID);
-
-                if (employee != null)
-                {
-                    // Find attendance records for the employee
-                    var attendanceListForEmployee = attendanceList.Where(a => a.attendance_e_id == employee.Id).ToList();
-
-                    // Combine data for the response
-                    var combinedData = new
-                    {
-                        PayRoll = payroll,
-                        Employee = employee,
-                        AttendanceList = attendanceListForEmployee
-                    };
-
-                    combinedDataList.Add(combinedData);
-                }
-            }
-
-            return Json(new { data = combinedDataList });
+            return Json(new { data = objPayRollList });
         }
-
         #endregion
     }
 }

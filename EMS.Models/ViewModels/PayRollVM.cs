@@ -12,6 +12,8 @@ namespace EMS.Models.ViewModels
     {
         public PayRoll PayRoll { get; set; }
         [ValidateNever]
+        public Employee Employee { get; set; }
+        [ValidateNever]
         public IEnumerable<SelectListItem> EmployeeList { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> LeaveTypeList { get; set; }
