@@ -67,10 +67,6 @@
                             </table>
                         </div>
                     </div>
-
-
-
-
                     <table class="table">
                         <tr hidden>
                             <td>
@@ -149,9 +145,10 @@
                             </td>
                             <td>
                                 <input placeholder="@Model.Employee.Emp_full_name" class="form-control" />
+                                <input hidden asp-for="PayRoll.CreatedBy" class="form-control" />
                                 <span asp-validation-for="PayRoll.CreatedBy" class="text-danger"></span>
                             </td>
-                        </tr>
+                        </tr> 
                         @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Accountant))
                         {
                             <tr>

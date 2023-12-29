@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -36,6 +37,7 @@ namespace EMS.Models
         public int CreatedBy { get; set; }
         public int ApprovedBy { get; set; }
         public DateTime? PayedDate { get; set; }
+        [ValidateNever]
         [ForeignKey("EmployeeID")]
         public Employee? Employee { get; set; }
     }

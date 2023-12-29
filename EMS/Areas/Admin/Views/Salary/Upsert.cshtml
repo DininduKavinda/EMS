@@ -162,27 +162,6 @@
                                 <span asp-validation-for="PayRoll.CreatedBy" class="text-danger"></span>
                             </td>
                         </tr>
-                        @if (Model.Employee.Id == 0)
-                        {
-                            <tr>
-                                <td>
-                                    <label asp-for="PayRoll.PayedDate" class="control-label"></label>
-                                </td>
-                                <td>
-                                    <input asp-for="PayRoll.PayedDate" class="form-control" />
-                                    <span asp-validation-for="PayRoll.PayedDate" class="text-danger"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label asp-for="PayRoll.ApprovedBy" class="control-label"></label>
-                                </td>
-                                <td>
-                                    <input asp-for="PayRoll.ApprovedBy" class="form-control" />
-                                    <span asp-validation-for="PayRoll.ApprovedBy" class="text-danger"></span>
-                                </td>
-                            </tr>
-                        }
                         <!-- Repeat similar blocks for other properties -->
                     </table>
 
@@ -229,7 +208,7 @@
                     workDays = 1;
                 }
                 // Calculate NetSalary
-                var netSalary = netBasicSalary * workDays + allowances - advanced;
+                var netSalary = (netBasicSalary * workDays) + allowances - advanced;
 
                 // Update NetSalary field
                 $("#netSalaryInput").val(netSalary.toFixed(2));

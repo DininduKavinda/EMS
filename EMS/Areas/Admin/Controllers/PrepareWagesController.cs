@@ -35,7 +35,7 @@ namespace EMS.Web.Areas.Admin.Controllers
                 }),
                 PayRoll = new PayRoll(),
             };
-            payRollVM.PayRoll = _unitOfWorks.PayRoll.Get(u => u.Id == id , includeProperties: "Employee,Employee.JobTitle,Employee.Department,Employee.Gender,Employee.JobTitle.SalaryType");
+            payRollVM.PayRoll = _unitOfWorks.PayRoll.Get(u => u.Id == id , includeProperties: "Employee,Employee.Department,Employee.Gender,Employee.JobTitle.SalaryType");
             payRollVM.Employee = _unitOfWorks.Employee.Get(u => u.Id == payRollVM.PayRoll.CreatedBy);
             return View(payRollVM);
         }
@@ -45,23 +45,23 @@ namespace EMS.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (payRollVM.PayRoll.Id == 0)
-                {
-                    _unitOfWorks.PayRoll.Add(payRollVM.PayRoll);
-                }
-                else
-                {
-                    _unitOfWorks.PayRoll.Update(payRollVM.PayRoll);
-                }
+                var existingPayRoll = _unitOfWorks.PayRoll
+                    .Get(u => u.Id == payRollVM.PayRoll.Id, includeProperties: "Employee.JobTitle");
+                existingPayRoll.Allowances = payRollVM.PayRoll.Allowances;
+                existingPayRoll.Advanced = payRollVM.PayRoll.Advanced;
+                _unitOfWorks.PayRoll.Update(existingPayRoll);
                 _unitOfWorks.Save();
+
                 TempData["success"] = "Update Successfully";
                 return RedirectToAction("Index");
             }
             else
             {
+                TempData["error"] = "Update Failed";
                 return RedirectToAction("Index");
             }
         }
+
         #region API CALLS
         [HttpGet]
         public IActionResult GetAll()
