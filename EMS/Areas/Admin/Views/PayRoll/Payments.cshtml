@@ -1,0 +1,204 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model PayRollVM
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<button class="btn btn-success" onclick="printDiv()">Print Payslip</button>
+<div>
+<style>
+    .payslip-container {
+        max-width: 800px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-row {
+        background-color: #fbc403;
+        color: #363636;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .pay-row {
+        background-color: #fba001;
+        color: #363636;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 0px 0px 0 0;
+    }
+    .info-table,
+    .earnings-deductions-table,
+    .totals-table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+        .info-table th,
+        .info-table td,
+        .earnings-deductions-table th,
+        .earnings-deductions-table td,
+        .totals-table th,
+        .totals-table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .info-table th {
+            background-color: #fbc403;
+            color: #363636;
+        }
+
+        .totals-table th {
+            background-color: #fbc403;
+            color: #363636;
+            border-radius: 0 0 8px 8px;
+        }
+
+    .net-pay {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: right;
+    }
+</style>
+
+<div class="container payslip-container" >
+    <div class="header-row">
+        THAMES COATINGS INTERNATIONAL (PVT) LTD.
+    </div>
+    <div class="pay-row">
+        <p style="font-size:18px;">PaySlip</p>
+      <hr/>
+        <br />Address: THAMES COATING INTERNATIONAL (PVT) LTD,
+        <br>Morahena Estate, Weliweriya
+         <br>
+        Contact: 0332 258 408
+    </div>
+    <table class="table info-table">
+        <tr>
+            <th>Company ID:</th>
+            <td>@Model.PayRoll.Employee.Emp_Cid</td>
+            <th>Name</th>
+            <td>@Model.PayRoll.Employee.Emp_full_name</td>
+        </tr>
+        <tr>
+            <th>Department</th>
+            <td>@Model.PayRoll.Employee.Department?.Department_Name</td>
+            <th>Designation</th>
+            <td>@Model.PayRoll.Employee.JobTitle?.jt_name</td>
+        </tr>
+        <tr>
+            <th>DOB</th>
+            <td>@Model.PayRoll.Employee.Emp_DateOfBirth</td>
+            <th>Appontment Date</th>
+            <td>@Model.PayRoll.Employee.Emp_start_date</td>
+        </tr>
+        <tr>
+            <th>Contact</th>
+            <td>@Model.PayRoll.Employee.Emp_contact_info</td>
+            <th>Address</th>
+            <td>@Model.PayRoll.Employee.Emp_Address</td>
+        </tr>
+        <tr>
+            <th>Payment Month</th>
+            <td>@Model.PayRoll.PayedDate.Value.ToString("MMM yyyy")</td>
+            <th>Working Days</th>
+            <td>@Model.PayRoll.WorkDays</td>
+        </tr>
+       
+    </table>
+
+    <table class="table earnings-deductions-table">
+        <tr>
+            <th>Earnings</th>
+            <th>Amount</th>
+            <th>Deductions</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td>Basic</td>
+            <td>@Model.PayRoll.NetBasicSalary</td>
+
+            <td>EPF</td>
+            <td>@Model.PayRoll.Employee.JobTitle?.EmpoyeeEPF</td>
+        </tr>
+        <tr>
+                        <td>Allowances</td>
+            <td>@Model.PayRoll.Allowances</td>
+            <td>Advanced</td>
+            <td>@Model.PayRoll.Advanced</td>
+        </tr>
+        <!-- Add more earning and deduction rows as needed -->
+    </table>
+
+    <table class="table totals-table">
+        <tr>
+            <th>Gross Earnings</th>
+            <td>
+                @{
+                    var earnings = Model.PayRoll.NetBasicSalary + Model.PayRoll.Allowances;
+                }
+                @earnings
+                </td>
+            <th>Gross Deductions</th>
+            <td>
+                @{
+                    var deductions = Model.PayRoll.Employee.JobTitle?.EmpoyeeEPF + Model.PayRoll.Advanced;
+                }
+                @deductions
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="net-pay">NET PAY</td>
+            <td>@Model.PayRoll.NetSalary</td>
+            <td></td>
+        </tr>
+    </table>
+    <table class="table">
+        <tr>
+            <th>Prepared By</th>
+            <td>
+                @Model.Employee.Emp_full_name
+            </td>
+            <th>Approved By</th>
+            <td>
+                A.D. Pallemulla
+            </td>
+        </tr>
+        <tr>
+            <th>Payed Date</th>
+                
+            <td>
+                @Model.PayRoll.PayedDate.Value.ToString("ddd MMMM yyy")
+            </td>
+            <th>Employee Sign</th>
+            <td>
+            </td>
+        </tr>
+        
+    </table>
+</div>
+</div>
+@section Scripts{
+    <script>
+    function printDiv() {
+        var printContent = document.getElementById("printableArea").innerHTML;
+        var originalContent = document.body.innerHTML;
+
+        document.body.innerHTML = printContent;
+
+        window.print();
+
+        document.body.innerHTML = originalContent;
+    }
+</script>
+}

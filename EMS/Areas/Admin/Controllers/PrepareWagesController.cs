@@ -49,6 +49,11 @@ namespace EMS.Web.Areas.Admin.Controllers
                     .Get(u => u.Id == payRollVM.PayRoll.Id, includeProperties: "Employee.JobTitle");
                 existingPayRoll.Allowances = payRollVM.PayRoll.Allowances;
                 existingPayRoll.Advanced = payRollVM.PayRoll.Advanced;
+                existingPayRoll.NetBasicSalary = payRollVM.PayRoll.NetBasicSalary;
+                existingPayRoll.NetSalary = payRollVM.PayRoll.NetSalary;
+                existingPayRoll.WorkDays = payRollVM.PayRoll.WorkDays;
+                existingPayRoll.ApprovedBy = payRollVM.PayRoll.ApprovedBy;
+                existingPayRoll.PayedDate = payRollVM.PayRoll.PayedDate;
                 _unitOfWorks.PayRoll.Update(existingPayRoll);
                 _unitOfWorks.Save();
 
