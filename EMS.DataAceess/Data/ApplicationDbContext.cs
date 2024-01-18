@@ -27,6 +27,11 @@ namespace EMS.DataAccess.Data
         public DbSet<Gender> Genders { get; set; }
         public DbSet<PayRoll> PayRolls { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<WhereHouse> WhereHouses { get; set; }
+        public DbSet<Product> Products { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -315,19 +320,19 @@ namespace EMS.DataAccess.Data
             },
                new LeaveType
                {
-                Id = 2,
+                   Id = 2,
                    Leave_Type_Name = "Personal Leave"
-            },
+               },
                new LeaveType
                {
-                Id = 4,
+                   Id = 4,
                    Leave_Type_Name = "Other Leave"
-            },
+               },
              new LeaveType
              {
-                Id = 3,
+                 Id = 3,
                  Leave_Type_Name = "Vacation Leave"
-            });
+             });
             modelBuilder.Entity<JobTitle>().HasData(
             new JobTitle
             {
@@ -377,7 +382,7 @@ namespace EMS.DataAccess.Data
                 SalaryTypeID = 1,
                 EmpoyeeEPF = 0,
                 EmpoyeerEPF = 0,
-                EmpoyeerETF =   0
+                EmpoyeerETF = 0
             },
             new JobTitle
             {
@@ -417,7 +422,7 @@ namespace EMS.DataAccess.Data
                 SalaryTypeID = 1,
                 EmpoyeeEPF = 0,
                 EmpoyeerEPF = 0,
-                EmpoyeerETF =   0
+                EmpoyeerETF = 0
             },
             new JobTitle
             {
@@ -428,8 +433,115 @@ namespace EMS.DataAccess.Data
                 EmpoyeeEPF = 95000.00m * 0.08m,
                 EmpoyeerEPF = 95000.00m * 0.12m,
                 EmpoyeerETF = 95000.00m * 0.03m
-            }
+            });
+            modelBuilder.Entity<Color>().HasData(
+            new Color
+            {
+                Id = 1,
+                Color_Name = "Red",
+                Color_Code = "#FF0000"
+            },
+            new Color
+            {
+                Id = 2,
+                Color_Name = "Yellow",
+                Color_Code = "#FFFF00"
+            },
+            new Color
+            {
+                Id = 3,
+                Color_Name = "Green",
+                Color_Code = "#00FF00"
+            },
+            new Color { Id = 4, Color_Name = "Blue", Color_Code = "#0000FF" },
+            new Color { Id = 5, Color_Name = "Orange", Color_Code = "#FFA500" },
+            new Color { Id = 6, Color_Name = "Pink", Color_Code = "#FFC0CB" },
+            new Color { Id = 7, Color_Name = "Brown", Color_Code = "#A52A2A" },
+            new Color { Id = 8, Color_Name = "Cyan", Color_Code = "#00FFFF" },
+            new Color { Id = 9, Color_Name = "Magenta", Color_Code = "#FF00FF" },
+            new Color { Id = 10, Color_Name = "Lime", Color_Code = "#00FF00" },
+            new Color { Id = 11, Color_Name = "Teal", Color_Code = "#008080" },
+            new Color { Id = 12, Color_Name = "Indigo", Color_Code = "#4B0082" },
+            new Color { Id = 13, Color_Name = "Violet", Color_Code = "#EE82EE" },
+            new Color { Id = 14, Color_Name = "Maroon", Color_Code = "#800000" },
+            new Color { Id = 15, Color_Name = "Gold", Color_Code = "#FFD700" },
+            new Color { Id = 16, Color_Name = "Silver", Color_Code = "#C0C0C0" },
+            new Color { Id = 17, Color_Name = "Navy", Color_Code = "#000080" },
+            new Color { Id = 18, Color_Name = "Turquoise", Color_Code = "#40E0D0" },
+            new Color { Id = 19, Color_Name = "Olive", Color_Code = "#808000" },
+            new Color { Id = 20, Color_Name = "Peach", Color_Code = "#FFE5B4" },
+            new Color { Id = 21, Color_Name = "Salmon", Color_Code = "#FA8072" },
+            new Color { Id = 22, Color_Name = "Tomato", Color_Code = "#FF6347" },
+            new Color { Id = 23, Color_Name = "Plum", Color_Code = "#DDA0DD" },
+            new Color { Id = 24, Color_Name = "Khaki", Color_Code = "#F0E68C" }
+
         );
+            modelBuilder.Entity<Size>().HasData(
+            new Size
+            {
+                Id = 1,
+                Size_Name = "500ML"
+            },
+            new Size
+            {
+                Id = 2,
+                Size_Name = "1L"
+            },
+            new Size
+            {
+                Id = 3,
+                Size_Name = "4L"
+            },
+            new Size
+            {
+                Id = 4,
+                Size_Name = "10L"
+            },
+            new Size
+            {
+                Id = 5,
+                Size_Name = "20L"
+            },
+            new Size
+            {
+                Id = 6,
+                Size_Name = "20KG"
+            }
+           );
+            modelBuilder.Entity<Brand>().HasData(
+            new Brand
+            {
+                Id = 1,
+                Brand_Name = "Aquaseale"
+            },
+            new Brand
+            {
+                Id = 2,
+                Brand_Name = "Emultion"
+            },
+            new Brand
+            {
+                Id = 3,
+                Brand_Name = "Tile Motar"
+            },
+            new Brand
+            {
+                Id = 4,
+                Brand_Name = "Skim Coat"
+            }
+            );
+            for (int i = 1; i <= 30; i++)
+            {
+                modelBuilder.Entity<Product>().HasData(
+                    new Product
+                    {
+                        Id = i,
+                        BrandId = (i % 2) + 1,
+                        ColorId = (i % 20) + 1,
+                        SizeId = (i % 5) + 1 
+                    }
+                );
+            }
         }
     }
 }

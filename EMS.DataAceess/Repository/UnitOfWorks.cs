@@ -1,5 +1,7 @@
 ﻿using EMS.DataAccess.Data;
 using EMS.DataAccess.Repository.IRepository;
+using EMS.DataAceess.Repository;
+using EMS.DataAceess.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,11 @@ namespace EMS.DataAccess.Repository
         public IDepartmentRepository Department { get; private set; }
         public IGenderRepository Gender { get; private set; }
         public IPayRollRepository PayRoll { get; private set; }
+        public IBrandRepository Brand { get; private set; }
+        public IProductRepository Product { get; private set; }
+        public ISizeRepository Size { get; private set; }
+        public IColorRepository Color { get; private set; }
+        public IWhereHouseRepository WhereHouse { get; private set; }
         public UnitOfWorks(ApplicationDbContext db)
         {
             _db = db;
@@ -32,6 +39,11 @@ namespace EMS.DataAccess.Repository
             Department = new DepartmentRepository(_db);
             Gender = new GenderRepository(_db);
             PayRoll = new PayRollRepository(_db);
+            Product = new ProductRepository(_db);
+            WhereHouse = new WhereHouseRepository(_db);
+            Color = new ColorRepository(_db);
+            Size = new SizeRepository(_db);
+            Brand = new BrandRepository(_db);
         }
 
         public void Save()

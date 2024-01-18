@@ -6,45 +6,12 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": {
-            url: '/admin/employee/getAll'
+            url: '/admin/product/getAll'
         },
         columns: [
-            { data: 'emp_Cid' },
-            { data: 'department.department_Name'},
-            { data: 'emp_full_name' },
-            {
-                data: 'emp_DateOfBirth',
-                render: function (data, type, row) {
-                    if (type === 'display') {
-                        // Extract the date part from the datetime string
-                        var datePart = data.split('T')[0];
-                        return datePart;
-                    }
-                    return data; // Return the full datetime for other types
-                }            },
-            { data: 'emp_NIC' },
-            { data: 'jobTitle.jt_name' },
-            { data: 'emp_contact_info' },
-            {
-                data: 'emp_start_date',
-                render: function (data, type, row) {
-                    if (type === 'display') {
-                        // Extract the date part from the datetime string
-                        var datePart = data.split('T')[0];
-                        return datePart;
-                    }
-                    return data; // Return the full datetime for other types
-                }            },        
-            {
-                data: 'emp_Is_active',
-                render: function (data, type, row) {
-                    if (data === 0) {
-                        return '<button class="btn btn-danger">Deactivate</button>';
-                    } else {
-                        return '<button class="btn btn-success">Activate</button>';
-                    }
-                }
-            },
+            { data: 'brand.brand_Name' },
+            { data: 'color.color_Name'},
+            { data: 'size.size_Name' },
             {
                 data: 'id',
                 render: function (data) {

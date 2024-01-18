@@ -25,6 +25,7 @@ namespace EMS.DataAccess.Repository
             _db.Leaves.Include(u => u.Employee).Include(u => u.LeaveType);
             _db.JobTitles.Include(u => u.SalaryType);
             _db.PayRolls.Include(u => u.Employee).Include(u => u.Employee.JobTitle).Include(u => u.Employee.Department).Include(u => u.Employee.Gender).Include(u => u.Employee.JobTitle.SalaryType);
+            _db.Products.Include(u => u.Brand).Include(u => u.Color).Include(u => u.Size);
         }
         public void Add(T entity)
         {

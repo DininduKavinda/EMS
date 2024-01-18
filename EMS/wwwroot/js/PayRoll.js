@@ -39,8 +39,8 @@ function loadDataTable() {
                 render: function (data, type, row) {
                     return `
                         <div class="w-75 btn-group" role="group">
-                            <a href="/admin/payRoll/payments?id=${data}" class="btn btn-warning mx-2">
-                            Approve || Edit
+                            <a href="/admin/payRoll/payments?id=${data}" class="btn btn-success mx-2">
+                            PaySlip
                             </a>
                         </div>`;
                 }

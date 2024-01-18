@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EMS.DataAceess.Repository.IRepository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,11 @@ namespace EMS.DataAccess.Repository.IRepository
         IDepartmentRepository Department { get; }
         IGenderRepository Gender { get; }
         IPayRollRepository PayRoll { get; }
+        IBrandRepository Brand { get; }
+        IProductRepository Product { get; }
+        ISizeRepository Size { get; }
+        IColorRepository Color { get; }
+        IWhereHouseRepository WhereHouse { get; }
         void Save();
     }
 }
