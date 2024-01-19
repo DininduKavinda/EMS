@@ -23,6 +23,8 @@ namespace EMS.DataAccess.Repository.IRepository
         ISizeRepository Size { get; }
         IColorRepository Color { get; }
         IWhereHouseRepository WhereHouse { get; }
+        ISalesExecutiveRepository SalesExecutive { get; }
+        ICustomerRepository Customer { get; }
         void Save();
     }
 }

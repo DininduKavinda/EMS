@@ -2,6 +2,7 @@
 using EMS.DataAccess.Repository.IRepository;
 using EMS.DataAceess.Repository;
 using EMS.DataAceess.Repository.IRepository;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,8 @@ namespace EMS.DataAccess.Repository
         public ISizeRepository Size { get; private set; }
         public IColorRepository Color { get; private set; }
         public IWhereHouseRepository WhereHouse { get; private set; }
+        public ISalesExecutiveRepository SalesExecutive { get; private set; }
+        public ICustomerRepository Customer { get; private set; }
         public UnitOfWorks(ApplicationDbContext db)
         {
             _db = db;
@@ -44,6 +47,8 @@ namespace EMS.DataAccess.Repository
             Color = new ColorRepository(_db);
             Size = new SizeRepository(_db);
             Brand = new BrandRepository(_db);
+            SalesExecutive = new SalesExecutiveRepository(_db);
+            Customer = new CustomerRepository(_db);
         }
 
         public void Save()

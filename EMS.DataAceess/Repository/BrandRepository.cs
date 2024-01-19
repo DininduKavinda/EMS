@@ -20,7 +20,7 @@ namespace EMS.DataAceess.Repository
                 _db = db;
             }
             public void Update(Brand brand)
-            {
+            {   
                 _db.Brands.Update(brand);
             }
         

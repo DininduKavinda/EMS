@@ -233,9 +233,76 @@
                                 </li>
                             }
                             <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                <span class="hide-menu">Products</span>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link has-arrow"
+                                   href="javascript:void(0)"
+                                   aria-expanded="false">
+                                    <span class="d-flex">
+                                        <i class="ti ti-basket"></i>
+                                    </span>
+                                    <span class="hide-menu">Products Details</span>
+                                </a>
+                                <ul aria-expanded="false" class="collapse first-level">
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-area="User" asp-controller="Product" asp-action="Index" aria-expanded="false">
+                                            <span>
+                                                <i class="ti ti-list"></i>
+                                            </span>
+                                            <span class="hide-menu">Products</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-area="User" asp-controller="Product" asp-action="Upsert" aria-expanded="false">
+                                            <span>
+                                                <i class="ti ti-bookmark"></i>
+                                            </span>
+                                            <span class="hide-menu">Add Product</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                <span class="hide-menu">Stocks And Wherehouses</span>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link has-arrow"
+                                   href="javascript:void(0)"
+                                   aria-expanded="false">
+                                    <span class="d-flex">
+                                        <i class="ti ti-basket"></i>
+                                    </span>
+                                    <span class="hide-menu">Stocks And Wherehouses</span>
+                                </a>
+                                <ul aria-expanded="false" class="collapse first-level">
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-area="User" asp-controller="Product" asp-action="Index" aria-expanded="false">
+                                            <span>
+                                                <i class="ti ti-list"></i>
+                                            </span>
+                                            <span class="hide-menu">WhereHouses</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-area="User" asp-controller="Product" asp-action="Upsert" aria-expanded="false">
+                                            <span>
+                                                <i class="ti ti-bookmark"></i>
+                                            </span>
+                                            <span class="hide-menu">Stocks</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Authentication</span>
                         </li>
+
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
                                 <span>

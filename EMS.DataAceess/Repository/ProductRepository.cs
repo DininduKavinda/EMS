@@ -24,6 +24,4 @@ namespace EMS.DataAceess.Repository
         }
 
     }
-    {
-    }
 }

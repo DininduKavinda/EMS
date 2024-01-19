@@ -6,12 +6,13 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": {
-            url: '/user/product/getAll'
+            url: '/user/customer/getAll'
         },
         columns: [
-            { data: 'brand.brand_Name' },
-            { data: 'color.color_Name'},
-            { data: 'size.size_Name' },
+            { data: 'customer_Shop_Name' },
+            { data: 'customer_Name' },
+            { data: 'customer_Address' },
+            { data: 'customer_Contact_No' },
             {
                 data: 'id',
                 render: function (data) {
@@ -38,10 +39,10 @@ function Delete(url) {
         if (result.isConfirmed) {
             $.ajax({
                 url: url,
-                type:'DELETE',
+                type: 'DELETE',
                 success: function (data) {
                     dataTable.ajax.reload();
-                    toastr.success(data.message); 
+                    toastr.success(data.message);
                 }
             })
         }

@@ -10,18 +10,16 @@ using System.Threading.Tasks;
 
 namespace EMS.DataAceess.Repository
 {
-    public class WhereHouseRepository : Repository<WhereHouse>, IWhereHouseRepository
+    public class CustomerRepository : Repository<Customer> , ICustomerRepository
     {
-
         private readonly ApplicationDbContext _db;
-        public WhereHouseRepository(ApplicationDbContext db) : base(db)
+        public CustomerRepository (ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
-        public void Update(WhereHouse whereHouse)
+        public void Update(Customer customer)
         {
-            _db.WhereHouses.Update(whereHouse);
+            _db.Customers.Update(customer);
         }
-
     }
 }
