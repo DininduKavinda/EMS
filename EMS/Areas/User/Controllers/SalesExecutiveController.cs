@@ -24,7 +24,7 @@ namespace EMS.Web.Areas.User.Controllers
         [HttpGet]
         public IActionResult getAll() 
         {
-            List<SalesExecutive> objsalesexe = _unitOfWorks.SalesExecutive.GetAll().ToList();
+            List<SalesExecutive> objsalesexe = _unitOfWorks.SalesExecutive.GetAll(includeProperties:"Employee").ToList();
             return Json(new {data = objsalesexe});
         }
         #endregion

@@ -320,6 +320,30 @@ namespace EMS.DataAceess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Customer_Shop_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Customer_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Customer_Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Customer_Contact_No = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Customer_CityId = table.Column<int>(type: "int", nullable: false),
+                    Customer_Road = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Customers_Cities_Customer_CityId",
+                        column: x => x.Customer_CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -2675,6 +2699,11 @@ namespace EMS.DataAceess.Migrations
                 column: "DistrictId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Customers_Customer_CityId",
+                table: "Customers",
+                column: "Customer_CityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Districts_ProvinceId",
                 table: "Districts",
                 column: "ProvinceId");
@@ -2762,7 +2791,7 @@ namespace EMS.DataAceess.Migrations
                 name: "Attendances");
 
             migrationBuilder.DropTable(
-                name: "Cities");
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Leaves");
@@ -2783,7 +2812,7 @@ namespace EMS.DataAceess.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Districts");
+                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "LeaveTypes");
@@ -2795,7 +2824,7 @@ namespace EMS.DataAceess.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Provinces");
+                name: "Districts");
 
             migrationBuilder.DropTable(
                 name: "Brands");
@@ -2814,6 +2843,9 @@ namespace EMS.DataAceess.Migrations
 
             migrationBuilder.DropTable(
                 name: "JobTitles");
+
+            migrationBuilder.DropTable(
+                name: "Provinces");
 
             migrationBuilder.DropTable(
                 name: "SalaryTypes");

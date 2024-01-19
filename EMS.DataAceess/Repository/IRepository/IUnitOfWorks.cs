@@ -25,6 +25,7 @@ namespace EMS.DataAccess.Repository.IRepository
         IWhereHouseRepository WhereHouse { get; }
         ISalesExecutiveRepository SalesExecutive { get; }
         ICustomerRepository Customer { get; }
+        ICityRepository City { get; } 
         void Save();
     }
 }

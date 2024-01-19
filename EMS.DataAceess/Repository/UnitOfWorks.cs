@@ -30,6 +30,7 @@ namespace EMS.DataAccess.Repository
         public IWhereHouseRepository WhereHouse { get; private set; }
         public ISalesExecutiveRepository SalesExecutive { get; private set; }
         public ICustomerRepository Customer { get; private set; }
+        public ICityRepository City {  get; private set; }
         public UnitOfWorks(ApplicationDbContext db)
         {
             _db = db;
@@ -49,6 +50,7 @@ namespace EMS.DataAccess.Repository
             Brand = new BrandRepository(_db);
             SalesExecutive = new SalesExecutiveRepository(_db);
             Customer = new CustomerRepository(_db);
+            City = new CityRepository(_db);
         }
 
         public void Save()

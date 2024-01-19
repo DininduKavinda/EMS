@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EMS.DataAceess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240119054239_Initializer")]
+    [Migration("20240119105039_Initializer")]
     partial class Initializer
     {
         /// <inheritdoc />
@@ -11363,6 +11363,44 @@ namespace EMS.DataAceess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("EMS.Models.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Customer_Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Customer_CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Customer_Contact_No")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Customer_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Customer_Road")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Customer_Shop_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Customer_CityId");
+
+                    b.ToTable("Customers");
+                });
+
             modelBuilder.Entity("EMS.Models.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -12961,6 +12999,17 @@ namespace EMS.DataAceess.Migrations
                         .IsRequired();
 
                     b.Navigation("District");
+                });
+
+            modelBuilder.Entity("EMS.Models.Customer", b =>
+                {
+                    b.HasOne("EMS.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("Customer_CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("EMS.Models.District", b =>
