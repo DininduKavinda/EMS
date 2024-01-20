@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EMS.DataAceess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240119105039_Initializer")]
+    [Migration("20240120090251_Initializer")]
     partial class Initializer
     {
         /// <inheritdoc />
@@ -11451,17 +11451,17 @@ namespace EMS.DataAceess.Migrations
                         new
                         {
                             Id = 7,
-                            Department_Name = "Legal"
+                            Department_Name = "Shop"
                         },
                         new
                         {
                             Id = 8,
-                            Department_Name = "Sales"
+                            Department_Name = "Loading"
                         },
                         new
                         {
                             Id = 9,
-                            Department_Name = "Human Resources"
+                            Department_Name = "Distribution"
                         },
                         new
                         {
@@ -12076,7 +12076,7 @@ namespace EMS.DataAceess.Migrations
                             EmpoyeerEPF = 0m,
                             EmpoyeerETF = 0m,
                             SalaryTypeID = 1,
-                            jt_name = "Job Title 1"
+                            jt_name = "Software Engineer"
                         },
                         new
                         {
@@ -12086,7 +12086,7 @@ namespace EMS.DataAceess.Migrations
                             EmpoyeerEPF = 6600.0000m,
                             EmpoyeerETF = 1650.0000m,
                             SalaryTypeID = 2,
-                            jt_name = "Job Title 2"
+                            jt_name = "Chief Accountant"
                         },
                         new
                         {
@@ -12096,7 +12096,7 @@ namespace EMS.DataAceess.Migrations
                             EmpoyeerEPF = 0m,
                             EmpoyeerETF = 0m,
                             SalaryTypeID = 1,
-                            jt_name = "Job Title 3"
+                            jt_name = "Accountant"
                         },
                         new
                         {
@@ -12106,7 +12106,7 @@ namespace EMS.DataAceess.Migrations
                             EmpoyeerEPF = 7800.0000m,
                             EmpoyeerETF = 1950.0000m,
                             SalaryTypeID = 2,
-                            jt_name = "Job Title 4"
+                            jt_name = "Account Assistant"
                         },
                         new
                         {
@@ -12116,7 +12116,7 @@ namespace EMS.DataAceess.Migrations
                             EmpoyeerEPF = 0m,
                             EmpoyeerETF = 0m,
                             SalaryTypeID = 1,
-                            jt_name = "Job Title 5"
+                            jt_name = "Sales Executive"
                         },
                         new
                         {
@@ -12126,7 +12126,7 @@ namespace EMS.DataAceess.Migrations
                             EmpoyeerEPF = 9000.0000m,
                             EmpoyeerETF = 2250.0000m,
                             SalaryTypeID = 2,
-                            jt_name = "Job Title 6"
+                            jt_name = "Area Sales Manager"
                         },
                         new
                         {
@@ -12136,7 +12136,7 @@ namespace EMS.DataAceess.Migrations
                             EmpoyeerEPF = 0m,
                             EmpoyeerETF = 0m,
                             SalaryTypeID = 1,
-                            jt_name = "Job Title 7"
+                            jt_name = "Traninee Accountant"
                         },
                         new
                         {
@@ -12146,7 +12146,7 @@ namespace EMS.DataAceess.Migrations
                             EmpoyeerEPF = 10200.0000m,
                             EmpoyeerETF = 2550.0000m,
                             SalaryTypeID = 2,
-                            jt_name = "Job Title 8"
+                            jt_name = "Light Vehicle Driver"
                         },
                         new
                         {
@@ -12156,7 +12156,7 @@ namespace EMS.DataAceess.Migrations
                             EmpoyeerEPF = 0m,
                             EmpoyeerETF = 0m,
                             SalaryTypeID = 1,
-                            jt_name = "Job Title 9"
+                            jt_name = "Heavy Vehicle Driver"
                         },
                         new
                         {
@@ -12166,7 +12166,7 @@ namespace EMS.DataAceess.Migrations
                             EmpoyeerEPF = 11400.0000m,
                             EmpoyeerETF = 2850.0000m,
                             SalaryTypeID = 2,
-                            jt_name = "Job Title 10"
+                            jt_name = "Administrative"
                         });
                 });
 

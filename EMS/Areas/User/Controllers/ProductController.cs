@@ -21,10 +21,6 @@ namespace EMS.Web.Areas.User.Controllers
         }
         public IActionResult Index()
         {
-            return View();
-        }
-        public IActionResult Upsert(int? id)
-        {
             ProductVM productVM = new()
             {
                 BrandList = _unitOfWorks.Brand.GetAll().Select(u => new SelectListItem
@@ -44,15 +40,7 @@ namespace EMS.Web.Areas.User.Controllers
                 }),
                 Product = new Product()
             };
-            if (id == null || id == 0)
-            {
-                return View(productVM);
-            }
-            else
-            {
-                productVM.Product = _unitOfWorks.Product.Get(u => u.Id == id);
-                return View(productVM);
-            }
+            return View(productVM);
         }
         [HttpPost]
         public IActionResult Upsert(ProductVM productVM)
@@ -98,6 +86,13 @@ namespace EMS.Web.Areas.User.Controllers
         {
             List<Product> objProd = _unitOfWorks.Product.GetAll(includeProperties: "Brand,Color,Size").ToList();
             return Json(new { data = objProd });
+        }
+        [HttpGet]
+        public IActionResult getByID(int id)
+        {
+            ProductVM productVM = new ProductVM();
+            productVM.Product = _unitOfWorks.Product.Get(u => u.Id == id);
+            return Json(new { data = productVM.Product });
         }
         [Authorize(Roles = SD.Role_Admin)]
         [HttpDelete]

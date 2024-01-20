@@ -6,19 +6,19 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": {
-            url: '/user/product/getAll'
+            url: '/user/salesExecutive/getAll'
         },
         columns: [
-            { data: 'brand.brand_Name' },
-            { data: 'color.color_Name'},
-            { data: 'size.size_Name' },
+            { data: 'id' },
+            { data: 'employee.emp_full_name' },
+            { data: 'sale_Exe_Route' },
             {
                 data: 'id',
                 render: function (data) {
                     return `
                     <div class="w-75 btn-group" role="group">
                     <a href="#" data-id="${data}" data-toggle="modal" data-target="#exampleModal" class="btn btn-warning mx-2  edit-button">Edit</a>
-                    <a onClick=Delete('/user/product/delete?id=${data}') class="btn btn-danger mx-2">Delete</a>
+                    <a onClick=Delete('/user/salesExecutive/delete?id=${data}') class="btn btn-danger mx-2">Delete</a>
                     </div>`;
                 }
             }
@@ -38,10 +38,10 @@ function Delete(url) {
         if (result.isConfirmed) {
             $.ajax({
                 url: url,
-                type:'DELETE',
+                type: 'DELETE',
                 success: function (data) {
                     dataTable.ajax.reload();
-                    toastr.success(data.message); 
+                    toastr.success(data.message);
                 }
             })
         }
@@ -50,13 +50,12 @@ function Delete(url) {
 $(document).on('click', '.edit-button', function () {
     var id = $(this).data('id');
     $.ajax({
-        url: '/user/product/getById?id=' + id,
+        url: '/user/salesExecutive/getById?id=' + id,
         type: 'GET',
         success: function (result) {
-            $("#exampleModal input[name='Product.Id']").val(result.data.id);
-            $("#exampleModal select[name='Product.BrandId']").val(result.data.brandId);
-            $("#exampleModal select[name='Product.ColorId']").val(result.data.colorId);
-            $("#exampleModal select[name='Product.SizeId']").val(result.data.sizeId);
+            $("#exampleModal input[name='SalesExecutive.Id']").val(result.data.id);
+            $("#exampleModal input[name='SalesExecutive.Sale_Exe_Route']").val(result.data.sale_Exe_Route);
+            $("#exampleModal select[name='SalesExecutive.EmployeeId']").val(result.data.employeeId);
             $("#exampleModal").modal({ backdrop: 'static' });
         },
         error: function (error) {

@@ -619,9 +619,9 @@ namespace EMS.DataAceess.Migrations
                     { 4, "Accounting" },
                     { 5, "Sales" },
                     { 6, "Engineering" },
-                    { 7, "Legal" },
-                    { 8, "Sales" },
-                    { 9, "Human Resources" },
+                    { 7, "Shop" },
+                    { 8, "Loading" },
+                    { 9, "Distribution" },
                     { 10, "Research and Development" }
                 });
 
@@ -720,16 +720,16 @@ namespace EMS.DataAceess.Migrations
                 columns: new[] { "Id", "BaseSalary", "EmpoyeeEPF", "EmpoyeerEPF", "EmpoyeerETF", "SalaryTypeID", "jt_name" },
                 values: new object[,]
                 {
-                    { 1, 1500.00m, 0m, 0m, 0m, 1, "Job Title 1" },
-                    { 2, 55000.00m, 4400.0000m, 6600.0000m, 1650.0000m, 2, "Job Title 2" },
-                    { 3, 1600.00m, 0m, 0m, 0m, 1, "Job Title 3" },
-                    { 4, 65000.00m, 5200.0000m, 7800.0000m, 1950.0000m, 2, "Job Title 4" },
-                    { 5, 1700.00m, 0m, 0m, 0m, 1, "Job Title 5" },
-                    { 6, 75000.00m, 6000.0000m, 9000.0000m, 2250.0000m, 2, "Job Title 6" },
-                    { 7, 1800.00m, 0m, 0m, 0m, 1, "Job Title 7" },
-                    { 8, 85000.00m, 6800.0000m, 10200.0000m, 2550.0000m, 2, "Job Title 8" },
-                    { 9, 2900.00m, 0m, 0m, 0m, 1, "Job Title 9" },
-                    { 10, 95000.00m, 7600.0000m, 11400.0000m, 2850.0000m, 2, "Job Title 10" }
+                    { 1, 1500.00m, 0m, 0m, 0m, 1, "Software Engineer" },
+                    { 2, 55000.00m, 4400.0000m, 6600.0000m, 1650.0000m, 2, "Chief Accountant" },
+                    { 3, 1600.00m, 0m, 0m, 0m, 1, "Accountant" },
+                    { 4, 65000.00m, 5200.0000m, 7800.0000m, 1950.0000m, 2, "Account Assistant" },
+                    { 5, 1700.00m, 0m, 0m, 0m, 1, "Sales Executive" },
+                    { 6, 75000.00m, 6000.0000m, 9000.0000m, 2250.0000m, 2, "Area Sales Manager" },
+                    { 7, 1800.00m, 0m, 0m, 0m, 1, "Traninee Accountant" },
+                    { 8, 85000.00m, 6800.0000m, 10200.0000m, 2550.0000m, 2, "Light Vehicle Driver" },
+                    { 9, 2900.00m, 0m, 0m, 0m, 1, "Heavy Vehicle Driver" },
+                    { 10, 95000.00m, 7600.0000m, 11400.0000m, 2850.0000m, 2, "Administrative" }
                 });
 
             migrationBuilder.InsertData(

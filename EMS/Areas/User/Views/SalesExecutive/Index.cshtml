@@ -1,14 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Index";
 }
-@model ProductVM
+@model SalesExecutiveVM
 <div class="container">
     <div class="row pt-4 pb3">
         <div class="col-6">
             <h1 class="text-primary">Basic Salary Info</h1>
         </div>
         <div class="col-6 text-end">
-            <a asp-controller="Product" asp-action="Upsert" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary add-new-button">
+            <a asp-controller="SalesExecutive" asp-action="Upsert" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary add-new-button">
                 <i class="bi bi-plus-circle"></i> Add New
             </a>
         </div>
@@ -25,27 +25,18 @@
                         <div class="modal-body">
                             <div class="row mt-4">
                                 <div class="col-md-12">
-                                    <input asp-for="Product.Id" hidden />
+                                    <input asp-for="SalesExecutive.Id" hidden />
                                     <div class="form-group">
-                                        <label asp-for="Product.BrandId" class="control-label"></label>
-                                        <select asp-for="@Model.Product.BrandId" asp-items="@Model.BrandList" class="form-select">
+                                        <label asp-for="SalesExecutive.EmployeeId" class="control-label"></label>
+                                        <select asp-for="@Model.SalesExecutive.EmployeeId" asp-items="@Model.EmployeeList" class="form-select">
                                             <option disabled value="0">Select </option>
                                         </select>
-                                        <span asp-validation-for="Product.BrandId" class="text-danger"></span>
+                                        <span asp-validation-for="SalesExecutive.EmployeeId" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label asp-for="Product.ColorId" class="control-label"></label>
-                                        <select asp-for="@Model.Product.ColorId" asp-items="@Model.ColorList" class="form-select">
-                                            <option disabled value="0">Select </option>
-                                        </select>
-                                        <span asp-validation-for="Product.ColorId" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Product.SizeId" class="control-label"></label>
-                                        <select asp-for="@Model.Product.SizeId" asp-items="@Model.SizeList" class="form-select">
-                                            <option disabled value="0">Select </option>
-                                        </select>
-                                        <span asp-validation-for="Product.SizeId" class="text-danger"></span>
+                                        <label asp-for="SalesExecutive.Sale_Exe_Route" class="control-label"></label>
+                                        <input asp-for="SalesExecutive.Sale_Exe_Route" class="form-control">
+                                        <span asp-validation-for="SalesExecutive.Sale_Exe_Route" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -63,15 +54,15 @@
         <thead>
 
             <tr>
-                <th>Brand</th>
-                <th>Color</th>
-                <th>Size</th>               
+                <th>Id</th>
+                <th>Executive Name</th>
+                <th>Route</th>
                 <th>Action</th>
             </tr>
         </thead>
     </table>
-    @section Scripts{
-        <script src="~/js/Product.js"></script>
+    @section Scripts {
+        <script src="~/js/SalesExecutive.js"></script>
         <script type="text/javascript">
             $(document).on('click', '.add-new-button', function () {
                 $("#exampleModal form")[0].reset();

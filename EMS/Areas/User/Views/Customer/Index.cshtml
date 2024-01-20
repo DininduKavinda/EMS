@@ -12,7 +12,7 @@
     <!-- Modal -->
     
         <div class="col-6 text-end">
-            <a asp-controller="Customer" asp-action="Upsert" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary">
+            <a asp-controller="Customer" asp-action="Upsert" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary add-new-button">
                 <i class="bi bi-plus-circle"></i> Add New
             </a>
         </div>
@@ -29,7 +29,7 @@
                     <div class="modal-body">
                         <div class="row mt-4">
                             <div class="col-md-12">
-                                <input asp-for="Customer.Id" hidden />
+                                <input asp-for="Customer.Id"  />
                                 <div class="form-group">
                                     <label asp-for="Customer.Customer_Name" class="control-label"></label>
                                     <input asp-for="Customer.Customer_Name"  class="form-control">
@@ -89,7 +89,12 @@
     </table>
     @section Scripts {
         <script src="~/js/Customer.js"></script>
-       
+       <script type="text/javascript">
+            $(document).on('click', '.add-new-button', function () {
+                $("#exampleModal form")[0].reset();
+                $("#exampleModal").modal({ backdrop: 'static' });
+            });
+       </script>
     }
 </div>
 

@@ -313,9 +313,9 @@ namespace EMS.DataAccess.Data
             new Department { Id = 4, Department_Name = "Accounting" },
             new Department { Id = 5, Department_Name = "Sales" },
             new Department { Id = 6, Department_Name = "Engineering" },
-            new Department { Id = 7, Department_Name = "Legal" },
-            new Department { Id = 8, Department_Name = "Sales" },
-            new Department { Id = 9, Department_Name = "Human Resources" },
+            new Department { Id = 7, Department_Name = "Shop" },
+            new Department { Id = 8, Department_Name = "Loading" },
+            new Department { Id = 9, Department_Name = "Distribution" },
             new Department { Id = 10, Department_Name = "Research and Development" }
             );
 
@@ -344,7 +344,7 @@ namespace EMS.DataAccess.Data
             new JobTitle
             {
                 Id = 1,
-                jt_name = "Job Title 1",
+                jt_name = "Software Engineer",
                 BaseSalary = 1500.00m,
                 SalaryTypeID = 1,
                 EmpoyeeEPF = 0,
@@ -354,7 +354,7 @@ namespace EMS.DataAccess.Data
             new JobTitle
             {
                 Id = 2,
-                jt_name = "Job Title 2",
+                jt_name = "Chief Accountant",
                 BaseSalary = 55000.00m,
                 SalaryTypeID = 2,
                 EmpoyeeEPF = 55000.00m * 0.08m,
@@ -364,7 +364,7 @@ namespace EMS.DataAccess.Data
             new JobTitle
             {
                 Id = 3,
-                jt_name = "Job Title 3",
+                jt_name = "Accountant",
                 BaseSalary = 1600.00m,
                 SalaryTypeID = 1,
                 EmpoyeeEPF = 0,
@@ -374,7 +374,7 @@ namespace EMS.DataAccess.Data
             new JobTitle
             {
                 Id = 4,
-                jt_name = "Job Title 4",
+                jt_name = "Account Assistant",
                 BaseSalary = 65000.00m,
                 SalaryTypeID = 2,
                 EmpoyeeEPF = 65000.00m * 0.08m,
@@ -384,7 +384,7 @@ namespace EMS.DataAccess.Data
             new JobTitle
             {
                 Id = 5,
-                jt_name = "Job Title 5",
+                jt_name = "Sales Executive",
                 BaseSalary = 1700.00m,
                 SalaryTypeID = 1,
                 EmpoyeeEPF = 0,
@@ -394,7 +394,7 @@ namespace EMS.DataAccess.Data
             new JobTitle
             {
                 Id = 6,
-                jt_name = "Job Title 6",
+                jt_name = "Area Sales Manager",
                 BaseSalary = 75000.00m,
                 SalaryTypeID = 2,
                 EmpoyeeEPF = 75000.00m * 0.08m,
@@ -404,7 +404,7 @@ namespace EMS.DataAccess.Data
             new JobTitle
             {
                 Id = 7,
-                jt_name = "Job Title 7",
+                jt_name = "Traninee Accountant",
                 BaseSalary = 1800.00m,
                 SalaryTypeID = 1,
                 EmpoyeeEPF = 0,
@@ -414,7 +414,7 @@ namespace EMS.DataAccess.Data
             new JobTitle
             {
                 Id = 8,
-                jt_name = "Job Title 8",
+                jt_name = "Light Vehicle Driver",
                 BaseSalary = 85000.00m,
                 SalaryTypeID = 2,
                 EmpoyeeEPF = 85000.00m * 0.08m,
@@ -424,7 +424,7 @@ namespace EMS.DataAccess.Data
             new JobTitle
             {
                 Id = 9,
-                jt_name = "Job Title 9",
+                jt_name = "Heavy Vehicle Driver",
                 BaseSalary = 2900.00m,
                 SalaryTypeID = 1,
                 EmpoyeeEPF = 0,
@@ -434,7 +434,7 @@ namespace EMS.DataAccess.Data
             new JobTitle
             {
                 Id = 10,
-                jt_name = "Job Title 10",
+                jt_name = "Administrative",
                 BaseSalary = 95000.00m,
                 SalaryTypeID = 2,
                 EmpoyeeEPF = 95000.00m * 0.08m,
@@ -442,7 +442,7 @@ namespace EMS.DataAccess.Data
                 EmpoyeerETF = 95000.00m * 0.03m
             });
             modelBuilder.Entity<Color>().HasData(
-            new Color
+            new Color 
             {
                 Id = 1,
                 Color_Name = "Red",
