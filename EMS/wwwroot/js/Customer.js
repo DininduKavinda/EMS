@@ -19,30 +19,9 @@ function loadDataTable() {
                 render: function (data) {
                     return `
                     <div class="w-75 btn-group" role="group">
-                    <a href="/user/customer/upsert?id=${data}" data-toggle="modal" data-target="#insertModel${data}" class="btn btn-warning mx-2">Edit</a>
+                    <a href="/user/customer/upsert?id=${data}" data-id="${data}" data-toggle="modal" data-target="#exampleModal" class="btn btn-warning mx-2  edit-button">Edit</a>
                     <a onClick=Delete('/user/customer/delete?id=${data}') class="btn btn-danger mx-2">Delete</a>
                     </div>
-
-                    <div class="modal fade" id="exampleModal${data}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <input type="text" value="${data}" />
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     `;
                 }
             }
@@ -71,3 +50,25 @@ function Delete(url) {
         }
     })
 }
+$(document).on('click', '.edit-button', function () {
+    var id = $(this).data('id');
+    $.ajax({
+        url: '/user/customer/getById?id=' + id,
+        type: 'GET',
+        success: function (result) {
+            $("#exampleModal input[name='Customer.Id']").val(result.data.id);
+            $("#exampleModal input[name='Customer.Customer_Name']").val(result.data.customer_Name);
+            $("#exampleModal input[name='Customer.Customer_Shop_Name']").val(result.data.customer_Shop_Name);
+            $("#exampleModal input[name='Customer.Customer_Contact_No']").val(result.data.customer_Contact_No);
+            $("#exampleModal input[name='Customer.Customer_Address']").val(result.data.customer_Address);
+            $("#exampleModal input[name='Customer.Customer_Road']").val(result.data.customer_Road);
+            $("#exampleModal select[name='Customer.Customer_CityId']").val(result.data.customer_CityId);
+            $("#exampleModal").modal({ backdrop: 'static' });
+        },
+        error: function (error) {
+            console.log(error);
+            $("#exampleModal").modal('close');
+        }
+    });
+});
+
