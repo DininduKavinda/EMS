@@ -12254,6 +12254,86 @@ namespace EMS.DataAceess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("EMS.Models.OrderForm", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("OrderForm_Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OrderForm_EnteredDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderForm_No")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("OrderRequired_Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Road")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SalesExecutiveId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubRoute")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("SalesExecutiveId");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("OrderForms");
+                });
+
+            modelBuilder.Entity("EMS.Models.OrderFormProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Check")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("OrderForm_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Required_Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Send_Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderForm_Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderFormProducts");
+                });
+
             modelBuilder.Entity("EMS.Models.PayRoll", b =>
                 {
                     b.Property<int>("Id")
@@ -12730,6 +12810,45 @@ namespace EMS.DataAceess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("EMS.Models.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("StatusName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            StatusName = "New Order"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            StatusName = "Pending"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            StatusName = "Hold"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            StatusName = "Complete"
+                        });
+                });
+
             modelBuilder.Entity("EMS.Models.WhereHouse", b =>
                 {
                     b.Property<int>("Id")
@@ -13075,6 +13194,52 @@ namespace EMS.DataAceess.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("LeaveType");
+                });
+
+            modelBuilder.Entity("EMS.Models.OrderForm", b =>
+                {
+                    b.HasOne("EMS.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EMS.Models.SalesExecutive", "SalesExecutive")
+                        .WithMany()
+                        .HasForeignKey("SalesExecutiveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EMS.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("SalesExecutive");
+
+                    b.Navigation("Status");
+                });
+
+            modelBuilder.Entity("EMS.Models.OrderFormProduct", b =>
+                {
+                    b.HasOne("EMS.Models.OrderForm", "OrderForm")
+                        .WithMany()
+                        .HasForeignKey("OrderForm_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EMS.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrderForm");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("EMS.Models.PayRoll", b =>

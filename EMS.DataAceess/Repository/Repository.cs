@@ -28,6 +28,8 @@ namespace EMS.DataAccess.Repository
             _db.Products.Include(u => u.Brand).Include(u => u.Color).Include(u => u.Size);
             _db.Customers.Include(u => u.City);
             _db.SalesExecutives.Include(u => u.Employee);
+            _db.OrderForms.Include(u => u.Customer).Include(u => u.SalesExecutive.Employee).Include(u => u.Status).Include(u =>u.Customer.City);
+            _db.OrderFormProducts.Include(u => u.Product.Brand).Include(u => u.Product.Color).Include(u => u.Product.Size).Include(u => u.OrderForm).Include(u =>u.Product);
         }
         public void Add(T entity)
         {

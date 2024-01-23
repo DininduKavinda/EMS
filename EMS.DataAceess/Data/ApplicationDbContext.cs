@@ -37,6 +37,9 @@ namespace EMS.DataAccess.Data
         public DbSet<District> Districts { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<OrderForm> OrderForms { get; set; }
+        public DbSet<OrderFormProduct> OrderFormProducts {  get; set; }
+        public DbSet<Status> Statuses { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -11672,8 +11675,29 @@ namespace EMS.DataAccess.Data
             );
             #endregion
             #region Order Forms
-
-            #endregion
-           }
+            modelBuilder.Entity<Status>().HasData(
+            new Status
+            {
+                Id = 1,
+                StatusName = "New Order"
+            },
+            new Status
+            {
+                Id = 2,
+                StatusName = "Pending"
+            },
+            new Status
+            {
+                Id = 3,
+                StatusName = "Hold"
+            },
+            new Status
+            {
+                Id = 4,
+                StatusName = "Complete"
+            }
+            );
+              #endregion
+          }
     }
 }

@@ -19,7 +19,7 @@ namespace EMS.Web.Areas.User.Controllers
             _unitOfWorks = unitOfWorks;
             _webHostEnvironment = webHostEnvironment;
         }
-        public IActionResult Index(int? id)
+        public IActionResult Index()
         {
             CustomerVM customerVM = new()
             {

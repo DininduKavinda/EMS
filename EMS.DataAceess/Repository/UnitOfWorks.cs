@@ -31,6 +31,9 @@ namespace EMS.DataAccess.Repository
         public ISalesExecutiveRepository SalesExecutive { get; private set; }
         public ICustomerRepository Customer { get; private set; }
         public ICityRepository City {  get; private set; }
+        public IOrderFormReository OrderForm { get; private set; }
+        public IOrderFormProductRepository OrderFormProduct { get; private set; }
+        public IStatusRepository Status { get; private set; }
         public UnitOfWorks(ApplicationDbContext db)
         {
             _db = db;
@@ -51,6 +54,9 @@ namespace EMS.DataAccess.Repository
             SalesExecutive = new SalesExecutiveRepository(_db);
             Customer = new CustomerRepository(_db);
             City = new CityRepository(_db);
+            OrderForm = new OrderFormRepository(_db);
+            OrderFormProduct = new OrderFormProductRepository(_db);
+            Status = new StatusRepository(_db);
         }
 
         public void Save()

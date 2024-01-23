@@ -135,6 +135,19 @@ namespace EMS.DataAceess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Statuses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StatusName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Statuses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -566,6 +579,74 @@ namespace EMS.DataAceess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "OrderForms",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    OrderForm_No = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    SalesExecutiveId = table.Column<int>(type: "int", nullable: false),
+                    SubRoute = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Road = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderForm_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OrderRequired_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OrderForm_EnteredDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderForms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderForms_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderForms_SalesExecutives_SalesExecutiveId",
+                        column: x => x.SalesExecutiveId,
+                        principalTable: "SalesExecutives",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderForms_Statuses_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Statuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderFormProducts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderForm_Id = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Required_Quantity = table.Column<int>(type: "int", nullable: false),
+                    Check = table.Column<bool>(type: "bit", nullable: false),
+                    Send_Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderFormProducts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderFormProducts_OrderForms_OrderForm_Id",
+                        column: x => x.OrderForm_Id,
+                        principalTable: "OrderForms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderFormProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "Brand_Name" },
@@ -681,6 +762,17 @@ namespace EMS.DataAceess.Migrations
                     { 4, "10L" },
                     { 5, "20L" },
                     { 6, "20KG" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "Id", "StatusName" },
+                values: new object[,]
+                {
+                    { 1, "New Order" },
+                    { 2, "Pending" },
+                    { 3, "Hold" },
+                    { 4, "Complete" }
                 });
 
             migrationBuilder.InsertData(
@@ -2739,6 +2831,31 @@ namespace EMS.DataAceess.Migrations
                 column: "Leave_Type_Id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderFormProducts_OrderForm_Id",
+                table: "OrderFormProducts",
+                column: "OrderForm_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderFormProducts_ProductId",
+                table: "OrderFormProducts",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderForms_CustomerId",
+                table: "OrderForms",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderForms_SalesExecutiveId",
+                table: "OrderForms",
+                column: "SalesExecutiveId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderForms_StatusId",
+                table: "OrderForms",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PayRolls_EmployeeID",
                 table: "PayRolls",
                 column: "EmployeeID");
@@ -2791,16 +2908,13 @@ namespace EMS.DataAceess.Migrations
                 name: "Attendances");
 
             migrationBuilder.DropTable(
-                name: "Customers");
-
-            migrationBuilder.DropTable(
                 name: "Leaves");
 
             migrationBuilder.DropTable(
-                name: "PayRolls");
+                name: "OrderFormProducts");
 
             migrationBuilder.DropTable(
-                name: "SalesExecutives");
+                name: "PayRolls");
 
             migrationBuilder.DropTable(
                 name: "WhereHouses");
@@ -2812,19 +2926,22 @@ namespace EMS.DataAceess.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Cities");
+                name: "LeaveTypes");
 
             migrationBuilder.DropTable(
-                name: "LeaveTypes");
+                name: "OrderForms");
 
             migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Districts");
+                name: "SalesExecutives");
+
+            migrationBuilder.DropTable(
+                name: "Statuses");
 
             migrationBuilder.DropTable(
                 name: "Brands");
@@ -2834,6 +2951,15 @@ namespace EMS.DataAceess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Sizes");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "Districts");
 
             migrationBuilder.DropTable(
                 name: "Departments");

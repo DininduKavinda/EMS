@@ -14,8 +14,11 @@ namespace EMS.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [DisplayName("Order Status")]
+        public int StatusId { get; set; }
+        [Required]
         [DisplayName("Order Form No")]
-        public int OrderForm_No { get; set; }
+        public string? OrderForm_No { get; set; }
         [Required]
         [DisplayName("Customer Name")]
         public int CustomerId { get; set; }
@@ -34,9 +37,14 @@ namespace EMS.Models
         [Required]
         [DisplayName("Required Date")]
         public DateTime OrderRequired_Date { get; set; }
+        [Required]
+        [DisplayName("Entered Date")]
+        public DateTime OrderForm_EnteredDate { get; set; }
         [ForeignKey("CustomerId")]
         public Customer? Customer { get; set; }
         [ForeignKey("SalesExecutiveId")]
         public SalesExecutive? SalesExecutive { get; set; }
+        [ForeignKey("StatusId")]
+        public Status? Status { get; set; }
     }
 }
