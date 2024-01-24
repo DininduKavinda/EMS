@@ -26,7 +26,7 @@ namespace EMS.DataAccess.Repository
             _db.JobTitles.Include(u => u.SalaryType);
             _db.PayRolls.Include(u => u.Employee).Include(u => u.Employee.JobTitle).Include(u => u.Employee.Department).Include(u => u.Employee.Gender).Include(u => u.Employee.JobTitle.SalaryType);
             _db.Products.Include(u => u.Brand).Include(u => u.Color).Include(u => u.Size);
-            _db.Customers.Include(u => u.City);
+            _db.Customers.Include(u => u.City); 
             _db.SalesExecutives.Include(u => u.Employee);
             _db.OrderForms.Include(u => u.Customer).Include(u => u.SalesExecutive.Employee).Include(u => u.Status).Include(u =>u.Customer.City);
             _db.OrderFormProducts.Include(u => u.Product.Brand).Include(u => u.Product.Color).Include(u => u.Product.Size).Include(u => u.OrderForm).Include(u =>u.Product);

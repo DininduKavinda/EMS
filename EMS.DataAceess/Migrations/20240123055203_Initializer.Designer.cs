@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EMS.DataAceess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240122110832_Initializer")]
+    [Migration("20240123055203_Initializer")]
     partial class Initializer
     {
         /// <inheritdoc />
@@ -11399,6 +11399,108 @@ namespace EMS.DataAceess.Migrations
                     b.HasIndex("Customer_CityId");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Customer_Address = "Address1",
+                            Customer_CityId = 1,
+                            Customer_Contact_No = "1234567890",
+                            Customer_Name = "Customer1",
+                            Customer_Road = "Road1",
+                            Customer_Shop_Name = "Shop1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Customer_Address = "Address2",
+                            Customer_CityId = 2,
+                            Customer_Contact_No = "2345678901",
+                            Customer_Name = "Customer2",
+                            Customer_Road = "Road2",
+                            Customer_Shop_Name = "Shop2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Customer_Address = "Address3",
+                            Customer_CityId = 3,
+                            Customer_Contact_No = "3456789012",
+                            Customer_Name = "Customer3",
+                            Customer_Road = "Road3",
+                            Customer_Shop_Name = "Shop3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Customer_Address = "Address4",
+                            Customer_CityId = 4,
+                            Customer_Contact_No = "4567890123",
+                            Customer_Name = "Customer4",
+                            Customer_Road = "Road4",
+                            Customer_Shop_Name = "Shop4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Customer_Address = "Address5",
+                            Customer_CityId = 5,
+                            Customer_Contact_No = "5678901234",
+                            Customer_Name = "Customer5",
+                            Customer_Road = "Road5",
+                            Customer_Shop_Name = "Shop5"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Customer_Address = "Address6",
+                            Customer_CityId = 6,
+                            Customer_Contact_No = "6789012345",
+                            Customer_Name = "Customer6",
+                            Customer_Road = "Road6",
+                            Customer_Shop_Name = "Shop6"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Customer_Address = "Address7",
+                            Customer_CityId = 7,
+                            Customer_Contact_No = "7890123456",
+                            Customer_Name = "Customer7",
+                            Customer_Road = "Road7",
+                            Customer_Shop_Name = "Shop7"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Customer_Address = "Address8",
+                            Customer_CityId = 8,
+                            Customer_Contact_No = "8901234567",
+                            Customer_Name = "Customer8",
+                            Customer_Road = "Road8",
+                            Customer_Shop_Name = "Shop8"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Customer_Address = "Address9",
+                            Customer_CityId = 9,
+                            Customer_Contact_No = "9012345678",
+                            Customer_Name = "Customer9",
+                            Customer_Road = "Road9",
+                            Customer_Shop_Name = "Shop9"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Customer_Address = "Address10",
+                            Customer_CityId = 10,
+                            Customer_Contact_No = "0123456789",
+                            Customer_Name = "Customer10",
+                            Customer_Road = "Road10",
+                            Customer_Shop_Name = "Shop10"
+                        });
                 });
 
             modelBuilder.Entity("EMS.Models.Department", b =>
@@ -11768,14 +11870,14 @@ namespace EMS.DataAceess.Migrations
                             Emp_Address = "20403 Bunker Hill Lane",
                             Emp_Cid = "509280",
                             Emp_DateOfBirth = new DateTime(1972, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Emp_Department_id = 2,
+                            Emp_Department_id = 1,
                             Emp_Email = "admin@gmail.com",
                             Emp_Gender_id = 2,
                             Emp_Is_active = 1,
                             Emp_NIC = 654654646,
                             Emp_contact_info = "190-481-6403",
                             Emp_dp = "Crimson",
-                            Emp_full_name = "Jeanie Norrie",
+                            Emp_full_name = "Dinindu Kavinda",
                             Emp_job_title_id = 7,
                             Emp_start_date = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -11801,7 +11903,7 @@ namespace EMS.DataAceess.Migrations
                             Emp_Address = "81 Carioca Lane",
                             Emp_Cid = "751033",
                             Emp_DateOfBirth = new DateTime(1971, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Emp_Department_id = 3,
+                            Emp_Department_id = 5,
                             Emp_Gender_id = 2,
                             Emp_Is_active = 1,
                             Emp_NIC = 654654646,
@@ -11817,7 +11919,7 @@ namespace EMS.DataAceess.Migrations
                             Emp_Address = "94 Towne Avenue",
                             Emp_Cid = "239178",
                             Emp_DateOfBirth = new DateTime(1966, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Emp_Department_id = 4,
+                            Emp_Department_id = 5,
                             Emp_Gender_id = 1,
                             Emp_Is_active = 2,
                             Emp_NIC = 654654646,
@@ -11849,7 +11951,7 @@ namespace EMS.DataAceess.Migrations
                             Emp_Address = "9979 Vernon Street",
                             Emp_Cid = "723826",
                             Emp_DateOfBirth = new DateTime(1992, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Emp_Department_id = 3,
+                            Emp_Department_id = 5,
                             Emp_Gender_id = 1,
                             Emp_Is_active = 2,
                             Emp_NIC = 654654646,
@@ -12274,8 +12376,9 @@ namespace EMS.DataAceess.Migrations
                     b.Property<DateTime>("OrderForm_EnteredDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OrderForm_No")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderForm_No")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderRequired_Date")
                         .HasColumnType("datetime2");

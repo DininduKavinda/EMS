@@ -31,7 +31,7 @@ namespace EMS.Web.Areas.User.Controllers
                     Text = u.Customer_Shop_Name + " - " + u.Customer_Address,
                     Value = u.Id.ToString()
                 }),
-                SalesExecutiveList = _unitOfWorks.SalesExecutive.GetAll().Select(u => new SelectListItem
+                SalesExecutiveList = _unitOfWorks.SalesExecutive.GetAll(includeProperties: "Employee").Select(u => new SelectListItem
                 {
                     Text = u.Employee?.Emp_full_name,
                     Value = u.Id.ToString()
@@ -41,6 +41,12 @@ namespace EMS.Web.Areas.User.Controllers
                     Text = u.StatusName,
                     Value = u.Id.ToString()
                 }),
+                ProductList = _unitOfWorks.Product.GetAll(includeProperties: "Brand,Color,Size").Select(u => new SelectListItem 
+                {
+                    Text = u.Brand?.Brand_Name + " - " + u.Color?.Color_Name + " - " + u.Size?.Size_Name,
+                    Value = u.Id.ToString()
+                }),
+                OrderFormProduct = new List<OrderFormProduct>(),
                 OrderForm = new OrderForm()
             };
             if (id == null || id == 0)
@@ -51,6 +57,39 @@ namespace EMS.Web.Areas.User.Controllers
             {
                 orderFormVM.OrderForm = _unitOfWorks.OrderForm.Get(u => u.Id == id);
                 return View(orderFormVM);
+            }
+        }
+        [HttpPost]
+        public IActionResult Upsert(OrderFormVM orderFormVM)
+        {
+            if (ModelState.IsValid)
+            {
+                if (orderFormVM.OrderForm.Id == 0)
+                {
+                    _unitOfWorks.OrderForm.Add(orderFormVM.OrderForm);
+                    
+                }
+                else
+                {
+                    _unitOfWorks.OrderForm.Update(orderFormVM.OrderForm);
+                }
+                _unitOfWorks.Save();
+                TempData["success"] = "update successfully";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                //orderFormVM.EmployeeList = _unitOfWorks.Employee.GetAll().Select(u => new SelectListItem
+                //{
+                //    Text = u.Emp_full_name,
+                //    Value = u.Id.ToString()
+                //});
+                //orderFormVM.LeaveTypeList = _unitOfWorks.LeaveType.GetAll().Select(u => new SelectListItem
+                //{
+                //    Text = u.Leave_Type_Name,
+                //    Value = u.Id.ToString()
+                //});
+                return View();
             }
         }
         #region APICALLS

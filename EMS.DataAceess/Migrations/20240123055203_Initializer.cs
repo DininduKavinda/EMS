@@ -586,7 +586,7 @@ namespace EMS.DataAceess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StatusId = table.Column<int>(type: "int", nullable: false),
-                    OrderForm_No = table.Column<int>(type: "int", nullable: false),
+                    OrderForm_No = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     SalesExecutiveId = table.Column<int>(type: "int", nullable: false),
                     SubRoute = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -2719,12 +2719,12 @@ namespace EMS.DataAceess.Migrations
                 columns: new[] { "Id", "Emp_Address", "Emp_Cid", "Emp_DateOfBirth", "Emp_Department_id", "Emp_Email", "Emp_Gender_id", "Emp_Is_active", "Emp_NIC", "Emp_contact_info", "Emp_dp", "Emp_full_name", "Emp_job_title_id", "Emp_start_date" },
                 values: new object[,]
                 {
-                    { 1, "20403 Bunker Hill Lane", "509280", new DateTime(1972, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "admin@gmail.com", 2, 1, 654654646, "190-481-6403", "Crimson", "Jeanie Norrie", 7, new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, "20403 Bunker Hill Lane", "509280", new DateTime(1972, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "admin@gmail.com", 2, 1, 654654646, "190-481-6403", "Crimson", "Dinindu Kavinda", 7, new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 2, "05080 Village Place", "583367", new DateTime(1973, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, null, 1, 1, 654654646, "231-972-7579", "Red", "Arabele Millwater", 7, new DateTime(2016, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, "81 Carioca Lane", "751033", new DateTime(1971, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, null, 2, 1, 654654646, "299-264-5583", "Mauv", "Karen Solomon", 1, new DateTime(2012, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, "94 Towne Avenue", "239178", new DateTime(1966, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, null, 1, 2, 654654646, "496-189-7339", "Blue", "Seamus Yeoman", 6, new DateTime(2012, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, "81 Carioca Lane", "751033", new DateTime(1971, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, null, 2, 1, 654654646, "299-264-5583", "Mauv", "Karen Solomon", 1, new DateTime(2012, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, "94 Towne Avenue", "239178", new DateTime(1966, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, null, 1, 2, 654654646, "496-189-7339", "Blue", "Seamus Yeoman", 6, new DateTime(2012, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 5, "59664 Gina Crossing", "663442", new DateTime(1988, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, null, 1, 1, 654654646, "260-523-1239", "Goldenrod", "Vincenty Frankcombe", 10, new DateTime(2021, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, "9979 Vernon Street", "723826", new DateTime(1992, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, null, 1, 2, 654654646, "773-437-6039", "Fuscia", "Tybalt Alldridge", 8, new DateTime(2013, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, "9979 Vernon Street", "723826", new DateTime(1992, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, null, 1, 2, 654654646, "773-437-6039", "Fuscia", "Tybalt Alldridge", 8, new DateTime(2013, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 7, "0 7th Place", "332886", new DateTime(1971, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, null, 1, 2, 654654646, "250-398-3300", "Puce", "Amye Adcock", 4, new DateTime(2017, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 8, "92 Pawling Alley", "681434", new DateTime(1988, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, 2, 654654646, "752-372-2010", "Aquamarine", "Frasier Shrigley", 2, new DateTime(2021, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 9, "63 Manley Terrace", "857369", new DateTime(1983, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, null, 2, 2, 654654646, "512-765-9897", "Red", "Magda Spraberry", 4, new DateTime(2021, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified) },
@@ -2734,6 +2734,23 @@ namespace EMS.DataAceess.Migrations
                     { 13, "2305 Stuart Drive", "672909", new DateTime(1998, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, null, 1, 1, 654654646, "255-334-1273", "Yellow", "Basilio Longhi", 8, new DateTime(2021, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 14, "574 Gulseth Crossing", "275978", new DateTime(1983, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, null, 1, 1, 654654646, "157-963-7726", "Violet", "Hewet Sorrell", 1, new DateTime(2016, 12, 29, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 15, "06 Mayfield Junction", "466923", new DateTime(1964, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, 1, 654654646, "831-374-8100", "Violet", "Dorothea Cantera", 9, new DateTime(2015, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "Id", "Customer_Address", "Customer_CityId", "Customer_Contact_No", "Customer_Name", "Customer_Road", "Customer_Shop_Name" },
+                values: new object[,]
+                {
+                    { 1, "Address1", 1, "1234567890", "Customer1", "Road1", "Shop1" },
+                    { 2, "Address2", 2, "2345678901", "Customer2", "Road2", "Shop2" },
+                    { 3, "Address3", 3, "3456789012", "Customer3", "Road3", "Shop3" },
+                    { 4, "Address4", 4, "4567890123", "Customer4", "Road4", "Shop4" },
+                    { 5, "Address5", 5, "5678901234", "Customer5", "Road5", "Shop5" },
+                    { 6, "Address6", 6, "6789012345", "Customer6", "Road6", "Shop6" },
+                    { 7, "Address7", 7, "7890123456", "Customer7", "Road7", "Shop7" },
+                    { 8, "Address8", 8, "8901234567", "Customer8", "Road8", "Shop8" },
+                    { 9, "Address9", 9, "9012345678", "Customer9", "Road9", "Shop9" },
+                    { 10, "Address10", 10, "0123456789", "Customer10", "Road10", "Shop10" }
                 });
 
             migrationBuilder.CreateIndex(

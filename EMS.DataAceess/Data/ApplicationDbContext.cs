@@ -20,8 +20,8 @@ namespace EMS.DataAccess.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<SalaryType> SalaryTypes { get; set; }
         public DbSet<JobTitle> JobTitles { get; set; }
-        public DbSet<Attendance> Attendances {  get; set; }
-        public DbSet<Leave> Leaves {  get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<Leave> Leaves { get; set; }
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Gender> Genders { get; set; }
@@ -38,7 +38,7 @@ namespace EMS.DataAccess.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<OrderForm> OrderForms { get; set; }
-        public DbSet<OrderFormProduct> OrderFormProducts {  get; set; }
+        public DbSet<OrderFormProduct> OrderFormProducts { get; set; }
         public DbSet<Status> Statuses { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,11 +48,11 @@ namespace EMS.DataAccess.Data
             new Employee
             {
                 Id = 1,
-                Emp_full_name = "Jeanie Norrie",
-                Emp_Email ="admin@gmail.com",
+                Emp_full_name = "Dinindu Kavinda",
+                Emp_Email = "admin@gmail.com",
                 Emp_Cid = "509280",
                 Emp_job_title_id = 7,
-                Emp_Department_id = 2,
+                Emp_Department_id = 1,
                 Emp_DateOfBirth = new DateTime(1972, 9, 22),
                 Emp_NIC = 654654646,
                 Emp_Address = "20403 Bunker Hill Lane",
@@ -84,7 +84,7 @@ namespace EMS.DataAccess.Data
                 Emp_full_name = "Karen Solomon",
                 Emp_Cid = "751033",
                 Emp_job_title_id = 1,
-                Emp_Department_id = 3,
+                Emp_Department_id = 5,
                 Emp_DateOfBirth = new DateTime(1971, 4, 25),
                 Emp_NIC = 654654646,
                 Emp_Address = "81 Carioca Lane",
@@ -100,7 +100,7 @@ namespace EMS.DataAccess.Data
                 Emp_full_name = "Seamus Yeoman",
                 Emp_Cid = "239178",
                 Emp_job_title_id = 6,
-                Emp_Department_id = 4,
+                Emp_Department_id = 5,
                 Emp_DateOfBirth = new DateTime(1966, 10, 11),
                 Emp_NIC = 654654646,
                 Emp_Address = "94 Towne Avenue",
@@ -132,7 +132,7 @@ namespace EMS.DataAccess.Data
                 Emp_full_name = "Tybalt Alldridge",
                 Emp_Cid = "723826",
                 Emp_job_title_id = 8,
-                Emp_Department_id = 3,
+                Emp_Department_id =5,
                 Emp_DateOfBirth = new DateTime(1992, 9, 30),
                 Emp_NIC = 654654646,
                 Emp_Address = "9979 Vernon Street",
@@ -445,7 +445,7 @@ namespace EMS.DataAccess.Data
                 EmpoyeerETF = 95000.00m * 0.03m
             });
             modelBuilder.Entity<Color>().HasData(
-            new Color 
+            new Color
             {
                 Id = 1,
                 Color_Name = "Red",
@@ -548,7 +548,7 @@ namespace EMS.DataAccess.Data
                         Id = i,
                         BrandId = (i % 2) + 1,
                         ColorId = (i % 20) + 1,
-                        SizeId = (i % 5) + 1 
+                        SizeId = (i % 5) + 1
                     }
                 );
             }
@@ -566,33 +566,33 @@ namespace EMS.DataAccess.Data
             new Province { Id = 9, NameEn = "Northern", NameSi = "උතුරු", NameTa = "வட" }
             );
 
-           modelBuilder.Entity<District>().HasData(
-           new District { Id = 1, ProvinceId = 6, NameEn = "Ampara", NameSi = "අම්පාර", NameTa = "அம்பாறை" },
-           new District { Id = 2, ProvinceId = 8, NameEn = "Anuradhapura", NameSi = "අනුරාධපුරය", NameTa = "அனுராதபுரம்" },
-           new District { Id = 3, ProvinceId = 7, NameEn = "Badulla", NameSi = "බදුල්ල", NameTa = "பதுளை" },
-           new District { Id = 4, ProvinceId = 6, NameEn = "Batticaloa", NameSi = "මඩකලපුව", NameTa = "மட்டக்களப்பு" },
-           new District { Id = 5, ProvinceId = 1, NameEn = "Colombo", NameSi = "කොළඹ", NameTa = "கொழும்பு" },
-           new District { Id = 6, ProvinceId = 3, NameEn = "Galle", NameSi = "ගාල්ල", NameTa = "காலி" },
-           new District { Id = 7, ProvinceId = 1, NameEn = "Gampaha", NameSi = "ගම්පහ", NameTa = "கம்பஹா" },
-           new District { Id = 8, ProvinceId = 3, NameEn = "Hambantota", NameSi = "හම්බන්තොට", NameTa = "அம்பாந்தோட்டை" },
-           new District { Id = 9, ProvinceId = 9, NameEn = "Jaffna", NameSi = "යාපනය", NameTa = "யாழ்ப்பாணம்" },
-           new District { Id = 10, ProvinceId = 1, NameEn = "Kalutara", NameSi = "කළුතර", NameTa = "களுத்துறை" },
-           new District { Id = 11, ProvinceId = 2, NameEn = "Kandy", NameSi = "මහනුවර", NameTa = "கண்டி" },
-           new District { Id = 12, ProvinceId = 5, NameEn = "Kegalle", NameSi = "කෑගල්ල", NameTa = "கேகாலை" },
-           new District { Id = 13, ProvinceId = 9, NameEn = "Kilinochchi", NameSi = "කිලිනොච්චිය", NameTa = "கிளிநொச்சி" },
-           new District { Id = 14, ProvinceId = 4, NameEn = "Kurunegala", NameSi = "කුරුණෑගල", NameTa = "குருணாகல்" },
-           new District { Id = 15, ProvinceId = 9, NameEn = "Mannar", NameSi = "මන්නාරම", NameTa = "மன்னார்" },
-           new District { Id = 16, ProvinceId = 2, NameEn = "Matale", NameSi = "මාතලේ", NameTa = "மாத்தளை" },
-           new District { Id = 17, ProvinceId = 3, NameEn = "Matara", NameSi = "මාතර", NameTa = "மாத்தறை" },
-           new District { Id = 18, ProvinceId = 7, NameEn = "Monaragala", NameSi = "මොණරාගල", NameTa = "மொணராகலை" },
-           new District { Id = 19, ProvinceId = 9, NameEn = "Mullaitivu", NameSi = "මුලතිව්", NameTa = "முல்லைத்தீவு" },
-           new District { Id = 20, ProvinceId = 2, NameEn = "Nuwara Eliya", NameSi = "නුවර එළිය", NameTa = "நுவரேலியா" },
-           new District { Id = 21, ProvinceId = 8, NameEn = "Polonnaruwa", NameSi = "පොළොන්නරුව", NameTa = "பொலன்னறுவை" },
-           new District { Id = 22, ProvinceId = 4, NameEn = "Puttalam", NameSi = "පුත්තලම", NameTa = "புத்தளம்" },
-           new District { Id = 23, ProvinceId = 5, NameEn = "Ratnapura", NameSi = "රත්නපුර", NameTa = "இரத்தினபுரி" },
-           new District { Id = 24, ProvinceId = 6, NameEn = "Trincomalee", NameSi = "ත්‍රිකුණාමලය", NameTa = "திருகோணமலை" },
-           new District { Id = 25, ProvinceId = 9, NameEn = "Vavuniya", NameSi = "වව්නියාව", NameTa = "வவுனியா" }
-            );
+            modelBuilder.Entity<District>().HasData(
+            new District { Id = 1, ProvinceId = 6, NameEn = "Ampara", NameSi = "අම්පාර", NameTa = "அம்பாறை" },
+            new District { Id = 2, ProvinceId = 8, NameEn = "Anuradhapura", NameSi = "අනුරාධපුරය", NameTa = "அனுராதபுரம்" },
+            new District { Id = 3, ProvinceId = 7, NameEn = "Badulla", NameSi = "බදුල්ල", NameTa = "பதுளை" },
+            new District { Id = 4, ProvinceId = 6, NameEn = "Batticaloa", NameSi = "මඩකලපුව", NameTa = "மட்டக்களப்பு" },
+            new District { Id = 5, ProvinceId = 1, NameEn = "Colombo", NameSi = "කොළඹ", NameTa = "கொழும்பு" },
+            new District { Id = 6, ProvinceId = 3, NameEn = "Galle", NameSi = "ගාල්ල", NameTa = "காலி" },
+            new District { Id = 7, ProvinceId = 1, NameEn = "Gampaha", NameSi = "ගම්පහ", NameTa = "கம்பஹா" },
+            new District { Id = 8, ProvinceId = 3, NameEn = "Hambantota", NameSi = "හම්බන්තොට", NameTa = "அம்பாந்தோட்டை" },
+            new District { Id = 9, ProvinceId = 9, NameEn = "Jaffna", NameSi = "යාපනය", NameTa = "யாழ்ப்பாணம்" },
+            new District { Id = 10, ProvinceId = 1, NameEn = "Kalutara", NameSi = "කළුතර", NameTa = "களுத்துறை" },
+            new District { Id = 11, ProvinceId = 2, NameEn = "Kandy", NameSi = "මහනුවර", NameTa = "கண்டி" },
+            new District { Id = 12, ProvinceId = 5, NameEn = "Kegalle", NameSi = "කෑගල්ල", NameTa = "கேகாலை" },
+            new District { Id = 13, ProvinceId = 9, NameEn = "Kilinochchi", NameSi = "කිලිනොච්චිය", NameTa = "கிளிநொச்சி" },
+            new District { Id = 14, ProvinceId = 4, NameEn = "Kurunegala", NameSi = "කුරුණෑගල", NameTa = "குருணாகல்" },
+            new District { Id = 15, ProvinceId = 9, NameEn = "Mannar", NameSi = "මන්නාරම", NameTa = "மன்னார்" },
+            new District { Id = 16, ProvinceId = 2, NameEn = "Matale", NameSi = "මාතලේ", NameTa = "மாத்தளை" },
+            new District { Id = 17, ProvinceId = 3, NameEn = "Matara", NameSi = "මාතර", NameTa = "மாத்தறை" },
+            new District { Id = 18, ProvinceId = 7, NameEn = "Monaragala", NameSi = "මොණරාගල", NameTa = "மொணராகலை" },
+            new District { Id = 19, ProvinceId = 9, NameEn = "Mullaitivu", NameSi = "මුලතිව්", NameTa = "முல்லைத்தீவு" },
+            new District { Id = 20, ProvinceId = 2, NameEn = "Nuwara Eliya", NameSi = "නුවර එළිය", NameTa = "நுவரேலியா" },
+            new District { Id = 21, ProvinceId = 8, NameEn = "Polonnaruwa", NameSi = "පොළොන්නරුව", NameTa = "பொலன்னறுவை" },
+            new District { Id = 22, ProvinceId = 4, NameEn = "Puttalam", NameSi = "පුත්තලම", NameTa = "புத்தளம்" },
+            new District { Id = 23, ProvinceId = 5, NameEn = "Ratnapura", NameSi = "රත්නපුර", NameTa = "இரத்தினபுரி" },
+            new District { Id = 24, ProvinceId = 6, NameEn = "Trincomalee", NameSi = "ත්‍රිකුණාමලය", NameTa = "திருகோணமலை" },
+            new District { Id = 25, ProvinceId = 9, NameEn = "Vavuniya", NameSi = "වව්නියාව", NameTa = "வவுனியா" }
+             );
             modelBuilder.Entity<City>().HasData(
 
              new City
@@ -11697,7 +11697,19 @@ namespace EMS.DataAccess.Data
                 StatusName = "Complete"
             }
             );
-              #endregion
-          }
+            modelBuilder.Entity<Customer>().HasData(
+            new Customer { Id = 1, Customer_Shop_Name = "Shop1", Customer_Name = "Customer1", Customer_Address = "Address1", Customer_Contact_No = "1234567890", Customer_CityId = 1, Customer_Road = "Road1" },
+            new Customer { Id = 2, Customer_Shop_Name = "Shop2", Customer_Name = "Customer2", Customer_Address = "Address2", Customer_Contact_No = "2345678901", Customer_CityId = 2, Customer_Road = "Road2" },
+            new Customer { Id = 3, Customer_Shop_Name = "Shop3", Customer_Name = "Customer3", Customer_Address = "Address3", Customer_Contact_No = "3456789012", Customer_CityId = 3, Customer_Road = "Road3" },
+            new Customer { Id = 4, Customer_Shop_Name = "Shop4", Customer_Name = "Customer4", Customer_Address = "Address4", Customer_Contact_No = "4567890123", Customer_CityId = 4, Customer_Road = "Road4" },
+            new Customer { Id = 5, Customer_Shop_Name = "Shop5", Customer_Name = "Customer5", Customer_Address = "Address5", Customer_Contact_No = "5678901234", Customer_CityId = 5, Customer_Road = "Road5" },
+            new Customer { Id = 6, Customer_Shop_Name = "Shop6", Customer_Name = "Customer6", Customer_Address = "Address6", Customer_Contact_No = "6789012345", Customer_CityId = 6, Customer_Road = "Road6" },
+            new Customer { Id = 7, Customer_Shop_Name = "Shop7", Customer_Name = "Customer7", Customer_Address = "Address7", Customer_Contact_No = "7890123456", Customer_CityId = 7, Customer_Road = "Road7" },
+            new Customer { Id = 8, Customer_Shop_Name = "Shop8", Customer_Name = "Customer8", Customer_Address = "Address8", Customer_Contact_No = "8901234567", Customer_CityId = 8, Customer_Road = "Road8" },
+            new Customer { Id = 9, Customer_Shop_Name = "Shop9", Customer_Name = "Customer9", Customer_Address = "Address9", Customer_Contact_No = "9012345678", Customer_CityId = 9, Customer_Road = "Road9" },
+            new Customer { Id = 10, Customer_Shop_Name = "Shop10", Customer_Name = "Customer10", Customer_Address = "Address10", Customer_Contact_No = "0123456789", Customer_CityId = 10, Customer_Road = "Road10" }
+            );
+            #endregion
+        }
     }
 }
