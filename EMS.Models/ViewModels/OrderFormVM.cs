@@ -22,6 +22,6 @@ namespace EMS.Models.ViewModels
         [ValidateNever]
         public IEnumerable<SelectListItem> StatusList { get; set; }
         [ValidateNever]
-        public IEnumerable<SelectListItem > ProductList { get; set; }
+        public IEnumerable<SelectListItem> ProductList { get; set; }
     }
 }
