@@ -46,7 +46,7 @@ namespace EMS.Web.Areas.User.Controllers
                     Text = u.Brand?.Brand_Name + " - " + u.Color?.Color_Name + " - " + u.Size?.Size_Name,
                     Value = u.Id.ToString()
                 }),
-                OrderFormProduct = new List<OrderFormProduct>(),
+                
                 OrderForm = new OrderForm()
             };
             if (id == null || id == 0)
@@ -67,7 +67,11 @@ namespace EMS.Web.Areas.User.Controllers
                 if (orderFormVM.OrderForm.Id == 0)
                 {
                     _unitOfWorks.OrderForm.Add(orderFormVM.OrderForm);
-                    
+                    foreach (var item in orderFormVM.OrderFormProduct)
+                    {
+                        item.OrderForm_Id = orderFormVM.OrderForm.Id;
+                        _unitOfWorks.OrderFormProduct.Add(item);
+                    }
                 }
                 else
                 {

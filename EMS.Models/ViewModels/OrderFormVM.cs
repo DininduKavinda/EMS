@@ -11,9 +11,10 @@ namespace EMS.Models.ViewModels
     public class OrderFormVM
     {
         public OrderForm OrderForm { get; set; }
-        public List<OrderFormProduct> OrderFormProduct { get; set; }
         [ValidateNever]
         public OrderFormProduct OrderFormProducts { get; set; }
+        [ValidateNever]
+        public List<OrderFormProduct> OrderFormProduct { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> CustomerList { get; set; }
         [ValidateNever]

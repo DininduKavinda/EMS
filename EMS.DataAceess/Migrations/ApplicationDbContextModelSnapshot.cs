@@ -12373,9 +12373,8 @@ namespace EMS.DataAceess.Migrations
                     b.Property<DateTime>("OrderForm_EnteredDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OrderForm_No")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("OrderForm_No")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("OrderRequired_Date")
                         .HasColumnType("datetime2");

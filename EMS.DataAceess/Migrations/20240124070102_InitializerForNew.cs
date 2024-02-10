@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EMS.DataAceess.Migrations
 {
     /// <inheritdoc />
-    public partial class Initializer : Migration
+    public partial class InitializerForNew : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -586,7 +586,7 @@ namespace EMS.DataAceess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StatusId = table.Column<int>(type: "int", nullable: false),
-                    OrderForm_No = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderForm_No = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     SalesExecutiveId = table.Column<int>(type: "int", nullable: false),
                     SubRoute = table.Column<string>(type: "nvarchar(max)", nullable: false),

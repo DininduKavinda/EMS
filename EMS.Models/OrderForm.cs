@@ -18,7 +18,7 @@ namespace EMS.Models
         public int StatusId { get; set; }
         [Required]
         [DisplayName("Order Form No")]
-        public string? OrderForm_No { get; set; }
+        public int OrderForm_No { get; set; }
         [Required]
         [DisplayName("Customer Name")]
         public int CustomerId { get; set; }

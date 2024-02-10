@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EMS.DataAceess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240123055203_Initializer")]
-    partial class Initializer
+    [Migration("20240124070102_InitializerForNew")]
+    partial class InitializerForNew
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -12376,9 +12376,8 @@ namespace EMS.DataAceess.Migrations
                     b.Property<DateTime>("OrderForm_EnteredDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OrderForm_No")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("OrderForm_No")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("OrderRequired_Date")
                         .HasColumnType("datetime2");
