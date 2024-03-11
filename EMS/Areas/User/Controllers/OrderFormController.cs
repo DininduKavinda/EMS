@@ -41,12 +41,17 @@ namespace EMS.Web.Areas.User.Controllers
                     Text = u.StatusName,
                     Value = u.Id.ToString()
                 }),
-                ProductList = _unitOfWorks.Product.GetAll(includeProperties: "Brand,Color,Size").Select(u => new SelectListItem 
+                ProductList = _unitOfWorks.Product.GetAll(includeProperties: "Brand,Color,Size").Select(u => new SelectListItem
                 {
                     Text = u.Brand?.Brand_Name + " - " + u.Color?.Color_Name + " - " + u.Size?.Size_Name,
                     Value = u.Id.ToString()
                 }),
-                
+                OrderFormProductList = _unitOfWorks.OrderFormProduct.GetAll(
+                        filter: u => u.OrderForm_Id == id,
+                        includeProperties: "Product.Brand,Product.Color,Product.Size"
+                    )
+                    .ToList(),
+
                 OrderForm = new OrderForm()
             };
             if (id == null || id == 0)
@@ -66,35 +71,35 @@ namespace EMS.Web.Areas.User.Controllers
             {
                 if (orderFormVM.OrderForm.Id == 0)
                 {
+                    orderFormVM.OrderForm.OrderForm_EnteredDate = DateTime.Now;
                     _unitOfWorks.OrderForm.Add(orderFormVM.OrderForm);
+                    _unitOfWorks.Save();
                     foreach (var item in orderFormVM.OrderFormProduct)
                     {
                         item.OrderForm_Id = orderFormVM.OrderForm.Id;
                         _unitOfWorks.OrderFormProduct.Add(item);
                     }
                 }
-                else
-                {
-                    _unitOfWorks.OrderForm.Update(orderFormVM.OrderForm);
-                }
+               
                 _unitOfWorks.Save();
                 TempData["success"] = "update successfully";
                 return RedirectToAction("Index");
             }
             else
             {
-                //orderFormVM.EmployeeList = _unitOfWorks.Employee.GetAll().Select(u => new SelectListItem
-                //{
-                //    Text = u.Emp_full_name,
-                //    Value = u.Id.ToString()
-                //});
-                //orderFormVM.LeaveTypeList = _unitOfWorks.LeaveType.GetAll().Select(u => new SelectListItem
-                //{
-                //    Text = u.Leave_Type_Name,
-                //    Value = u.Id.ToString()
-                //});
                 return View();
             }
+        }
+        [HttpPost]
+        public IActionResult Update(OrderFormProductVM orderFormProductVM)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWorks.OrderFormProduct.Update(orderFormProductVM.OrderFormProducts);
+                _unitOfWorks.Save();
+            }
+            TempData["success"] = "update successfully";
+            return RedirectToAction("Index");
         }
         #region APICALLS
         [HttpGet]
@@ -102,6 +107,12 @@ namespace EMS.Web.Areas.User.Controllers
         {
             List<OrderForm> orderFormList = _unitOfWorks.OrderForm.GetAll(includeProperties: "Customer,SalesExecutive.Employee,Status").ToList();        
             return Json(new { data = orderFormList });
+        }
+        public IActionResult getByID(int id)
+        {
+            OrderFormProductVM orderFormProductVM = new OrderFormProductVM();
+            orderFormProductVM.OrderFormProducts = _unitOfWorks.OrderFormProduct.Get(u => u.Id == id);
+            return Json(new { data = orderFormProductVM.OrderFormProducts });
         }
         #endregion
     }

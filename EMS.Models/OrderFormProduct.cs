@@ -31,6 +31,6 @@ namespace EMS.Models
         [ForeignKey("OrderForm_Id")]
         public OrderForm? OrderForm { get; set; }
         [ForeignKey("ProductId")]
-        public Product? Product { get; set; }
+        public Product? Product { get; set;  }
     }
 }
