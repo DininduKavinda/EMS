@@ -40,6 +40,7 @@ namespace EMS.DataAccess.Data
         public DbSet<OrderForm> OrderForms { get; set; }
         public DbSet<OrderFormProduct> OrderFormProducts { get; set; }
         public DbSet<Status> Statuses { get; set; }
+        public DbSet<Outlet> Outlets { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -11709,6 +11710,9 @@ namespace EMS.DataAccess.Data
             new Customer { Id = 9, Customer_Shop_Name = "Shop9", Customer_Name = "Customer9", Customer_Address = "Address9", Customer_Contact_No = "9012345678", Customer_CityId = 9, Customer_Road = "Road9" },
             new Customer { Id = 10, Customer_Shop_Name = "Shop10", Customer_Name = "Customer10", Customer_Address = "Address10", Customer_Contact_No = "0123456789", Customer_CityId = 10, Customer_Road = "Road10" }
             );
+            #endregion
+            #region
+
             #endregion
         }
     }

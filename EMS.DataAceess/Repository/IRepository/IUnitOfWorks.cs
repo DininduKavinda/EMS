@@ -29,6 +29,7 @@ namespace EMS.DataAccess.Repository.IRepository
         IOrderFormReository OrderForm {get;}
         IOrderFormProductRepository OrderFormProduct { get;}
         IStatusRepository Status { get; }
+        IOutletRepository Outlet { get; }
         void Save();
     }
 }

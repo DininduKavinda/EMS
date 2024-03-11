@@ -32,6 +32,9 @@ namespace EMS.Models
         [DisplayName("Road")]
         public string? Road { get; set; }
         [Required]
+        [DisplayName("Order Sign")]
+        public string? Sign_Image { get; set; }
+        [Required]
         [DisplayName("Order Form Date")]
         public DateTime OrderForm_Date { get; set; }
         [Required]

@@ -17,14 +17,14 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="OrderForm.CustomerId" class="control-label"></label>
-                                <select asp-for="@Model.OrderForm.CustomerId" asp-items="@Model.CustomerList" class="select2 form-select ">
+                                <select asp-for="@Model.OrderForm.CustomerId" asp-items="@Model.CustomerList" class="form-select ">
                                     <option disabled value="0">Select Name</option>
                                 </select>
                                 <span asp-validation-for="OrderForm.CustomerId" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="OrderForm.StatusId" class="control-label"></label>
-                                <select asp-for="@Model.OrderForm.StatusId" asp-items="@Model.StatusList" class="select2 form-select ">
+                                <select asp-for="@Model.OrderForm.StatusId" asp-items="@Model.StatusList" class="form-select ">
                                     <option disabled value="0">Select Name</option>
                                 </select>
                                 <span asp-validation-for="OrderForm.StatusId" class="text-danger"></span>
@@ -38,7 +38,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="OrderForm.SalesExecutiveId" class="control-label"></label>
-                                <select asp-for="@Model.OrderForm.SalesExecutiveId" asp-items="@Model.SalesExecutiveList" class="select2 form-select ">
+                                <select asp-for="@Model.OrderForm.SalesExecutiveId" asp-items="@Model.SalesExecutiveList" class="form-select ">
                                     <option disabled value="0">Select Name</option>
                                 </select>
                                 <span asp-validation-for="OrderForm.SalesExecutiveId" class="text-danger"></span>
@@ -58,6 +58,23 @@
                                 <input type="text" asp-for="OrderForm.SubRoute" class="form-control" />
                                 <span asp-validation-for="OrderForm.SubRoute" class="text-danger"></span>
                             </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label asp-for="OrderForm.Sign_Image" class="control-label"></label>
+                                <input type="file" accept="image/*" capture="environment" asp-for="OrderForm.Sign_Image" class="form-control" />
+                                <span asp-validation-for="OrderForm.Sign_Image" class="text-danger"></span>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-3">
+                        <div class="form-group">
+                                <label asp-for="OrderForm.Sign_Image" class="control-label"></label>
+                            <button type="button" onclick="openCamera()" class="btn btn-primary">Open Camera</button>
+                        </div>
+                        </div>
+                        <div id="previewContainer" class="form-group">
+                            <!-- Preview of captured image will be displayed here -->
                         </div>
                     </div>
                     <div style="text-align:center; ">
@@ -238,6 +255,34 @@
             templateRow.querySelector("input[name='OrderFormProduct[" + currentRowIndex + "].Send_Quantity']").value = "";
 
             document.getElementById("productRows").appendChild(templateRow);
+        });
+        function openCamera() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    // Success callback, stream contains video data
+                    // You may display this stream in a video element or handle it as needed
+                })
+                .catch(function (error) {
+                    // Error callback, handle errors
+                    console.error('Error accessing camera: ', error);
+                });
+        }
+
+        // Function to handle file input change event
+        document.getElementById('imageInput').addEventListener('change', function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                // Display preview of the image
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var imagePreview = document.createElement('img');
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.maxWidth = '100%'; // Adjust image size as needed
+                    document.getElementById('previewContainer').innerHTML = '';
+                    document.getElementById('previewContainer').appendChild(imagePreview);
+                };
+                reader.readAsDataURL(file);
+            }
         });
     </script>
 }
