@@ -7,6 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Distribution\Data\**" />
+    <Compile Remove="Areas\Distribution\Models\**" />
+    <Content Remove="Areas\Distribution\Data\**" />
+    <Content Remove="Areas\Distribution\Models\**" />
+    <EmbeddedResource Remove="Areas\Distribution\Data\**" />
+    <EmbeddedResource Remove="Areas\Distribution\Models\**" />
+    <None Remove="Areas\Distribution\Data\**" />
+    <None Remove="Areas\Distribution\Models\**" />
+    <TypeScriptCompile Remove="Areas\Distribution\Data\**" />
+    <TypeScriptCompile Remove="Areas\Distribution\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\images\logos\dark-logo.svg" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\libs\apexcharts\dist\apexcharts.amd.js" />
@@ -536,8 +549,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Distribution\Controllers\" />
-    <Folder Include="Areas\Distribution\Data\" />
-    <Folder Include="Areas\Distribution\Models\" />
     <Folder Include="Areas\Distribution\Views\" />
     <Folder Include="Areas\Identity\Data\" />
   </ItemGroup>
