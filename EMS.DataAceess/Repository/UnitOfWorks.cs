@@ -35,6 +35,8 @@ namespace EMS.DataAccess.Repository
         public IOrderFormProductRepository OrderFormProduct { get; private set; }
         public IStatusRepository Status { get; private set; }
         public IOutletRepository Outlet { get; private set; }
+        public IVehicleRepository Vehicle { get; private set; }
+        public IVehicleTypeRepository VehicleType { get; private set; }
         public UnitOfWorks(ApplicationDbContext db)
         {
             _db = db;
@@ -59,6 +61,8 @@ namespace EMS.DataAccess.Repository
             OrderFormProduct = new OrderFormProductRepository(_db);
             Status = new StatusRepository(_db);
             Outlet = new OutletRepository(_db);
+            Vehicle = new VehicleRepository(_db);
+            VehicleType = new VehicleTypeRepository(_db);
         }
 
         public void Save()

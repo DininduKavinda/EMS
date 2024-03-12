@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@model VehicleVM
+<div class="container">
+    <div class="row pt-4 pb3">
+        <div class="col-6">
+            <h1 class="text-primary">Basic Salary Info</h1>
+        </div>
+
+        <!-- Modal -->
+
+        <div class="col-6 text-end">
+            <a asp-controller="Outlet" asp-action="Upsert" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary add-new-button">
+                <i class="bi bi-plus-circle"></i> Add New
+            </a>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Customer Form</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form asp-action="Upsert" method="post" class="my-4">
+                        <div class="modal-body">
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <input asp-for="Vehicle.Id" />
+                                    <div class="form-group">
+                                        <label asp-for="Vehicle.VehicleType_Id" class="control-label"></label>
+                                        <select asp-for="@Model.Vehicle.VehicleType_Id" asp-items="@Model.VehicleTypeList" class="form-select">
+                                            <option disabled value="0">Select </option>
+                                        </select>
+                                        <span asp-validation-for="Vehicle.VehicleType_Id" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Vehicle.VehicleName" class="control-label"></label>
+                                        <input asp-for="Vehicle.VehicleName" class="form-control">
+                                        <span asp-validation-for="Vehicle.VehicleName" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Vehicle.VehicleNumber" class="control-label"></label>
+                                        <input asp-for="Vehicle.VehicleNumber" class="form-control">
+                                        <span asp-validation-for="Vehicle.VehicleNumber" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Vehicle.Description" class="control-label"></label>
+                                        <input asp-for="Vehicle.Description" class="form-control">
+                                        <span asp-validation-for="Vehicle.Description" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Vehicle.Status" class="control-label"></label>
+                                        <input asp-for="Vehicle.Status" class="form-control">
+                                        <span asp-validation-for="Vehicle.Status" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table id="tblData" class="table table-striped" style="width:100%">
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>VehicleName</th>
+                <th>VehicleNumber</th>
+                <th>VehicleType</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+    @section Scripts {
+        <script src="~/js/Vehicle.js"></script>
+        <script type="text/javascript">
+            $(document).on('click', '.add-new-button', function () {
+                $("#exampleModal form")[0].reset();
+                $("#exampleModal").modal({ backdrop: 'static' });
+            });
+        </script>
+    }
+</div>
+

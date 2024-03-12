@@ -41,6 +41,8 @@ namespace EMS.DataAccess.Data
         public DbSet<OrderFormProduct> OrderFormProducts { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Outlet> Outlets { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<VehicleType> VehicleTypes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -11711,8 +11713,29 @@ namespace EMS.DataAccess.Data
             new Customer { Id = 10, Customer_Shop_Name = "Shop10", Customer_Name = "Customer10", Customer_Address = "Address10", Customer_Contact_No = "0123456789", Customer_CityId = 10, Customer_Road = "Road10" }
             );
             #endregion
-            #region
-
+            #region Vehicle
+            modelBuilder.Entity<VehicleType>().HasData(
+            new VehicleType
+            {
+                Id = 1,
+                Name = "Car"
+            },
+            new VehicleType
+            {
+                Id = 2,
+                Name = "Van"
+            },
+            new VehicleType
+            {
+                Id = 3,
+                Name = "Lorry"
+            },
+            new VehicleType
+            {
+                Id = 4,
+                Name = "Cab"
+            }
+            );
             #endregion
         }
     }
