@@ -21,7 +21,7 @@ namespace EMS.Models
         public string? VehicleNumber { get; set; }
         [Required]
         [DisplayName("Vehicle Type")]
-        public int? VehicleType_Id { get; set; }
+        public int VehicleType_Id { get; set; }
         public string? Description { get; set; }
         public int Status { get; set; } = 0;
         [ForeignKey("VehicleType_Id")]

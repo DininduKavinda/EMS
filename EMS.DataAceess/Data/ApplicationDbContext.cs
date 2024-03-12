@@ -43,6 +43,7 @@ namespace EMS.DataAccess.Data
         public DbSet<Outlet> Outlets { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleType> VehicleTypes { get; set; }
+        public DbSet<DistributionPoint> DistributionPoints { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -11713,7 +11714,7 @@ namespace EMS.DataAccess.Data
             new Customer { Id = 10, Customer_Shop_Name = "Shop10", Customer_Name = "Customer10", Customer_Address = "Address10", Customer_Contact_No = "0123456789", Customer_CityId = 10, Customer_Road = "Road10" }
             );
             #endregion
-            #region Vehicle
+            #region Distribution
             modelBuilder.Entity<VehicleType>().HasData(
             new VehicleType
             {
@@ -11736,6 +11737,61 @@ namespace EMS.DataAccess.Data
                 Name = "Cab"
             }
             );
+            modelBuilder.Entity<Outlet>().HasData(
+           new Outlet
+           {
+               Id = 1,
+               Outlet_Name = "Pelawatta",
+               Outlet_Address = "No 18, New Parliment Road, Pelawatta",
+               Contact_number = "+94 112 589 268",
+               Email = "thamesdec@yahoo.com",
+               OpeningHours = "8.00 am - 5.30 pm"
+           },
+           new Outlet
+           {
+               Id = 2,
+               Outlet_Name = "Kiribathgoda",
+               Outlet_Address = "No 18, New Parliment Road, Pelawatta",
+               Contact_number = "+94 112 589 268",
+               Email = "thamesdec@yahoo.com",
+               OpeningHours = "8.00 am - 5.30 pm"
+           },
+           new Outlet
+           {
+               Id = 3,
+               Outlet_Name = "Malabe",
+               Outlet_Address = "No 18, New Parliment Road, Pelawatta",
+               Contact_number = "+94 112 589 268",
+               Email = "thamesdec@yahoo.com",
+               OpeningHours = "8.00 am - 5.30 pm"
+           },
+           new Outlet
+           {
+               Id = 4,
+               Outlet_Name = "Kirindiwela",
+               Outlet_Address = "No 18, New Parliment Road, Pelawatta",
+               Contact_number = "+94 112 589 268",
+               Email = "thamesdec@yahoo.com",
+               OpeningHours = "8.00 am - 5.30 pm"
+           }
+           );
+            modelBuilder.Entity<DistributionPoint>().HasData(
+          new DistributionPoint
+          {
+              Id = 1,
+              Name = "Pelawatta",
+              Address = "No 18, New Parliment Road, Pelawatta",
+              Description = "+94 112 589 268"
+              
+          },
+          new DistributionPoint
+          {
+              Id = 2,
+              Name = "Weliweriya",
+              Address = "No 18, New Parliment Road, Pelawatta",
+              Description = "+94 112 589 268"
+          }
+          );
             #endregion
         }
     }

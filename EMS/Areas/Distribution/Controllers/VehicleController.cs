@@ -29,7 +29,7 @@ namespace EMS.Web.Areas.Distribution.Controllers
                 }),
                 Vehicle = new Vehicle(),
             };
-            return View();
+            return View(vehicleVM);
         }
         public IActionResult Upsert(VehicleVM vehicleVM)
         {
@@ -63,7 +63,7 @@ namespace EMS.Web.Areas.Distribution.Controllers
         public IActionResult getByID(int id)
         {
             Vehicle vehicle  = new Vehicle();
-            vehicle = _unitOfWorks.Vehicle.Get(u => u.Id == id);
+            vehicle = _unitOfWorks.Vehicle.Get(u => u.Id == id , includeProperties: "VehicleType");
             return Json(new { data = vehicle });
         }
         [HttpDelete]

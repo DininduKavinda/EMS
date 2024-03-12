@@ -548,7 +548,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Distribution\Controllers\" />
     <Folder Include="Areas\Distribution\Views\" />
     <Folder Include="Areas\Identity\Data\" />
   </ItemGroup>

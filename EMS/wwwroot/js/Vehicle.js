@@ -11,7 +11,7 @@ function loadDataTable() {
         columns: [
             { data: 'vehicleName' },
             { data: 'vehicleNumber' },
-            { data: 'vehicleType_Id' },
+            { data: 'vehicleType.name' },
             { data: 'description' },
             { data: 'status' },
             {
@@ -56,7 +56,7 @@ $(document).on('click', '.edit-button', function () {
         url: '/distribution/vehicle/getById?id=' + id,
         type: 'GET',
         success: function (result) {
-            $("#exampleModal input[name='Id']").val(result.data.id);
+            $("#exampleModal input[name='Vehicle.Id']").val(result.data.id);
             $("#exampleModal select[name='Vehicle.VehicleType_Id']").val(result.data.vehicleType_Id);
             $("#exampleModal input[name='Vehicle.VehicleName']").val(result.data.vehicleName);
             $("#exampleModal input[name='Vehicle.VehicleNumber']").val(result.data.vehicleNumber);

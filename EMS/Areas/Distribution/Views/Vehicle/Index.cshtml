@@ -28,7 +28,7 @@
                         <div class="modal-body">
                             <div class="row mt-4">
                                 <div class="col-md-12">
-                                    <input asp-for="Vehicle.Id" />
+                                    <input asp-for="Vehicle.Id" value="0" />
                                     <div class="form-group">
                                         <label asp-for="Vehicle.VehicleType_Id" class="control-label"></label>
                                         <select asp-for="@Model.Vehicle.VehicleType_Id" asp-items="@Model.VehicleTypeList" class="form-select">
@@ -72,7 +72,6 @@
         <thead>
 
             <tr>
-                <th>ID</th>
                 <th>VehicleName</th>
                 <th>VehicleNumber</th>
                 <th>VehicleType</th>
