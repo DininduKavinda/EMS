@@ -44,6 +44,10 @@ namespace EMS.DataAccess.Data
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleType> VehicleTypes { get; set; }
         public DbSet<DistributionPoint> DistributionPoints { get; set; }
+        public DbSet<VehicleMaintain> VehicleMaintains { get; set; }
+        public DbSet<VehicleInsurance> VehicleInsurances { get; set; }
+        public DbSet<VehicleLicense> VehicleLicenses { get; set; }
+        public DbSet<VehicleService> VehicleServices { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

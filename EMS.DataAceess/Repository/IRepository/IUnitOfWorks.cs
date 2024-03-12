@@ -33,6 +33,7 @@ namespace EMS.DataAccess.Repository.IRepository
         IVehicleRepository Vehicle { get; }
         IVehicleTypeRepository VehicleType { get; }
         IDistributionPointRepository DistributionPoint { get; }
+        IVehicleMaintainRepository VehicleMaintain { get; }
         void Save();
     }
 }
