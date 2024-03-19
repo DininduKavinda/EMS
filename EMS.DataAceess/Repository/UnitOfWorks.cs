@@ -39,6 +39,9 @@ namespace EMS.DataAccess.Repository
         public IVehicleTypeRepository VehicleType { get; private set; }
         public IDistributionPointRepository DistributionPoint { get; private set; }
         public IVehicleMaintainRepository VehicleMaintain { get; private set; }
+        public IVehicleServiceRepository VehicleService { get; private set; }
+        public IVehicleLisenceRepository VehicleLisence { get; private set; }
+        public IVehicleInsuranceRepository VehicleInsurance { get; private set; }
         public UnitOfWorks(ApplicationDbContext db)
         {
             _db = db;
@@ -67,6 +70,9 @@ namespace EMS.DataAccess.Repository
             VehicleType = new VehicleTypeRepository(_db);
             DistributionPoint = new DistributionPointRepository(_db);
             VehicleMaintain = new VehicleMaintainRepository(_db);
+            VehicleService = new VehicleServiceRepository(_db);
+            VehicleLisence = new VehicleLisenceRepository(_db);
+            VehicleInsurance = new VehicleInsuranceRepository(_db);
         }
 
         public void Save()

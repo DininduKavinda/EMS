@@ -31,6 +31,9 @@ namespace EMS.DataAccess.Repository
             _db.OrderForms.Include(u => u.Customer).Include(u => u.SalesExecutive.Employee).Include(u => u.Status).Include(u =>u.Customer.City);
             _db.OrderFormProducts.Include(u => u.Product.Brand).Include(u => u.Product.Color).Include(u => u.Product.Size).Include(u => u.OrderForm).Include(u =>u.Product);
             _db.Vehicles.Include(u => u.VehicleType);
+            _db.VehicleMaintains.Include(u => u.Vehicle);
+            _db.VehicleLicenses.Include(u => u.Vehicle);
+            _db.VehicleInsurances.Include(u => u.Vehicle);
         }
         public void Add(T entity)
         {
