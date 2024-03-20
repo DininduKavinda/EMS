@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@model VehicleMaintainVM
+<div class="container">
+    <div class="row pt-4 pb3">
+        <div class="col-6">
+            <h1 class="text-primary">Basic Salary Info</h1>
+        </div>
+
+        <!-- Modal -->
+
+        <div class="col-6 text-end">
+            <a asp-controller="VehicleMaintain" asp-action="VehicleMaintainUpsert" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary add-new-button">
+                <i class="bi bi-plus-circle"></i> Add New
+            </a>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Customer Form</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form asp-action="VehicelMaintainUpsert" method="post" class="my-4">
+                        <div class="modal-body">
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <input asp-for="VehicleMaintain.Id" value="0" hidden />
+                                    <input asp-for="VehicleMaintain.VehicleId" value="@Model.Vehicles.Id" hidden />
+                                    <div class="form-group">
+                                        <label asp-for="VehicleMaintain.Maintain_Reason" class="control-label"></label>
+                                        <input asp-for="VehicleMaintain.Maintain_Reason" class="form-control">
+                                        <span asp-validation-for="VehicleMaintain.Maintain_Reason" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="VehicleMaintain.Maintain_Date" class="control-label"></label>
+                                        <input asp-for="VehicleMaintain.Maintain_Date" class="form-control">
+                                        <span asp-validation-for="VehicleMaintain.Maintain_Date" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="VehicleMaintain.Maintain_Cost" class="control-label"></label>
+                                        <input asp-for="VehicleMaintain.Maintain_Cost" class="form-control">
+                                        <span asp-validation-for="VehicleMaintain.Maintain_Cost" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="VehicleMaintain.Maintain_Details" class="control-label"></label>
+                                        <input asp-for="VehicleMaintain.Maintain_Details" class="form-control">
+                                        <span asp-validation-for="VehicleMaintain.Maintain_Details" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="VehicleMaintain.Maintain_Status" class="control-label"></label>
+                                        <input asp-for="VehicleMaintain.Maintain_Status" class="form-control">
+                                        <span asp-validation-for="VehicleMaintain.Maintain_Status" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="VehicleMaintain.Maintain_By" class="control-label"></label>
+                                        <input asp-for="VehicleMaintain.Maintain_By" class="form-control">
+                                        <span asp-validation-for="VehicleMaintain.Maintain_By" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="VehicleMaintain.MaintainImage" class="control-label"></label>
+                                        <input type="file" name="file" class="form-control" />
+                                        <span asp-validation-for="VehicleMaintain.MaintainImage" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-6">
+        <div class="white-box text-center"><img src="https://www.bootdey.com/image/430x600/00CED1/000000" class="img-responsive"></div>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-6">
+        <h4 class="box-title mt-5">@Model.Vehicles.VehicleName</h4>
+        <p> @Model.Vehicles.Description </p>
+        <h2 class="mt-5">
+            @Model.Vehicles.VehicleNumber
+        </h2>
+
+        
+        <h3 class="box-title mt-5">@Model.Vehicles.VehicleType.Name</h3>
+       
+    </div>
+    <table id="tblData" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Maintain Reason</th>
+                <th>Maintain Date</th>
+                <th>Maintain Cost</th>
+                <th>Maintain Details</th>
+                <th>Maintain Status</th>
+                <th>Maintain By</th>
+                <th>Maintain Image</th>
+            </tr>
+        </thead>
+    </table>
+    @section Scripts {
+        <script src="~/js/VehicleMaintain.js"></script>
+        <script type="text/javascript">
+            $(document).on('click', '.add-new-button', function () {
+                $("#exampleModal form")[0].reset();
+                $("#exampleModal").modal({ backdrop: 'static' });
+            });
+        </script>
+    }
+</div>
+

@@ -31,10 +31,30 @@ namespace EMS.Web.Areas.Distribution.Controllers
             };
             return View(vehicleVM);
         }
-        public IActionResult Upsert(VehicleVM vehicleVM)
+        public IActionResult Upsert(VehicleVM vehicleVM, IFormFile file)
         {
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string vehiclePath = Path.Combine(wwwRootPath, @"images\Vehicle");
+                    if (!string.IsNullOrEmpty(vehicleVM.Vehicle.VehicleImage))
+                    {
+                        //delete old image
+                        var oldImagePath = Path.Combine(wwwRootPath, vehicleVM.Vehicle.VehicleImage.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+                    using (var fileStream = new FileStream(Path.Combine(vehiclePath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    vehicleVM.Vehicle.VehicleImage = @"\images\Vehicle\" + fileName;
+                }
                 if (vehicleVM.Vehicle.Id == 0)
                 {
                     _unitOfWorks.Vehicle.Add(vehicleVM.Vehicle);

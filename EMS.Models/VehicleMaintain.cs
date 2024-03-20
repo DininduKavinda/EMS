@@ -33,7 +33,7 @@ namespace EMS.Models
         public string? Maintain_Status { get; set; }
         [Required]
         [DisplayName("Maintain By")]
-        public int Maintain_By { get; set; }
+        public string? Maintain_By { get; set; }
         [Required]
         public string? MaintainImage { get; set; }
         [ForeignKey("VehicleId")]

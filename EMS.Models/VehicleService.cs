@@ -25,6 +25,8 @@ namespace EMS.Models
         [Required]
         [DisplayName("Service Cost")]
         public int Service_Cost { get; set; }
+        [DisplayName("Serviced By")]
+        public string? Service_By { get; set; }
         [Required]
         public string? ServiceImage { get; set; }
         [ForeignKey("VehicleId")]

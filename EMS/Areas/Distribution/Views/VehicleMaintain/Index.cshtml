@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Index";
 }
-@model VehicleMaintain
+@model Vehicle
 <div class="container">
     <div class="row pt-4 pb3">
         <div class="col-6">
@@ -9,76 +9,6 @@
         </div>
 
         <!-- Modal -->
-
-        <div class="col-6 text-end">
-            <a asp-controller="VehicleMaintain" asp-action="VehicleMaintain" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary add-new-button">
-                <i class="bi bi-plus-circle"></i> Add New
-            </a>
-        </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Customer Form</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form asp-action="Upsert" method="post" class="my-4">
-                        <div class="modal-body">
-                            <div class="row mt-4">
-                                <div class="col-md-12">
-                                    <input asp-for="Id" value="0" />
-                                    <div class="form-group">
-                                        <label asp-for="Vehicle.VehicleName" class="control-label"></label>
-                                        <input asp-for="Vehicle.VehicleName" class="form-control" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Maintain_Reason" class="control-label"></label>
-                                        <input asp-for="Maintain_Reason" class="form-control">
-                                        <span asp-validation-for="Maintain_Reason" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Maintain_Date" class="control-label"></label>
-                                        <input asp-for="Maintain_Date" class="form-control">
-                                        <span asp-validation-for="Maintain_Date" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Maintain_Cost" class="control-label"></label>
-                                        <input asp-for="Maintain_Cost" class="form-control">
-                                        <span asp-validation-for="Maintain_Cost" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Maintain_Details" class="control-label"></label>
-                                        <input asp-for="Maintain_Details" class="form-control">
-                                        <span asp-validation-for="Maintain_Details" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Maintain_Status" class="control-label"></label>
-                                        <input asp-for="Maintain_Status" class="form-control">
-                                        <span asp-validation-for="Maintain_Status" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Maintain_By" class="control-label"></label>
-                                        <input asp-for="Maintain_By" class="form-control" >
-                                        <span asp-validation-for="Maintain_By" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="MaintainImage" class="control-label"></label>
-                                        <input type="file" asp-for="MaintainImage" class="form-control">
-                                        <span asp-validation-for="MaintainImage" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
     <table id="tblData" class="table table-striped" style="width:100%">
         <thead>
@@ -87,20 +17,16 @@
                 <th>VehicleName</th>
                 <th>VehicleNumber</th>
                 <th>VehicleType</th>
-                <th>Description</th>
+                <th>Lisence</th>
+                <th>Insurance</th>
+                <th>Maintain</th>
+                <th>Service</th>
                 <th>Status</th>
-                <th>Action</th>
             </tr>
         </thead>
     </table>
     @section Scripts {
-        <script src="~/js/Vehicle.js"></script>
-        <script type="text/javascript">
-            $(document).on('click', '.add-new-button', function () {
-                $("#exampleModal form")[0].reset();
-                $("#exampleModal").modal({ backdrop: 'static' });
-            });
-        </script>
+        <script src="~/js/VehicleDetails.js"></script>
     }
 </div>
 
