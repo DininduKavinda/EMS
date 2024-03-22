@@ -16,9 +16,7 @@ function loadDataTable() {
             { data: 'maintain_Status' },
             { data: 'maintain_By' },
             { data: 'maintainImage' },
-            {
-                data: 'id',
-            }
+            { data: 'id', }
              
         ]
     });

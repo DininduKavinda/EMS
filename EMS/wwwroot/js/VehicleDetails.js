@@ -48,7 +48,12 @@ function loadDataTable() {
                     </div>`;
                 }
             },
-            { data: 'status' }
+            {
+                data: 'vehicleImage',
+                render: function (data) {
+                    return '<img src="' + data + '" style="width: 100px; height: 100px" alt="Vehicle Image">';
+                }
+            }
         ]
     });
 }

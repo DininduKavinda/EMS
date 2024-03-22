@@ -9,6 +9,12 @@ function loadDataTable() {
             url: '/distribution/vehicle/getAll'
         },
         columns: [
+            {
+                data: 'vehicleImage',
+                render: function (data) {
+                    return '<img src="' + data + '" style="width: 100px; height: 100px" alt="Vehicle Image">';
+                }
+            },
             { data: 'vehicleName' },
             { data: 'vehicleNumber' },
             { data: 'vehicleType.name' },

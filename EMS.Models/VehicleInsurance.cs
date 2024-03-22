@@ -25,7 +25,6 @@ namespace EMS.Models
         [Required]
         [DisplayName("Insurance Cost")]
         public int Insurance_Cost { get; set; }
-        [Required]
         public string? InsuranceImage { get; set; }
         [ForeignKey("VehicleId")]
         public Vehicle? Vehicle { get; set; }

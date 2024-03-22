@@ -24,7 +24,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form asp-action="VehicelMaintainUpsert" method="post" class="my-4">
+                    <form asp-action="VehicelMaintainUpsert" method="post" class="my-4" enctype="multipart/form-data">
                         <div class="modal-body">
                             <div class="row mt-4">
                                 <div class="col-md-12">
@@ -78,18 +78,13 @@
         </div>
     </div>
     <div class="col-lg-5 col-md-5 col-sm-6">
-        <div class="white-box text-center"><img src="https://www.bootdey.com/image/430x600/00CED1/000000" class="img-responsive"></div>
+        <div class="white-box text-center"><img src="@Model.Vehicles.VehicleImage" class="img-responsive"></div>
     </div>
     <div class="col-lg-7 col-md-7 col-sm-6">
-        <h4 class="box-title mt-5">@Model.Vehicles.VehicleName</h4>
-        <p> @Model.Vehicles.Description </p>
-        <h2 class="mt-5">
-            @Model.Vehicles.VehicleNumber
-        </h2>
-
-        
-        <h3 class="box-title mt-5">@Model.Vehicles.VehicleType.Name</h3>
-       
+        <h4 class="box-title mt-5"><small> Name :  </small>@Model.Vehicles.VehicleName</h4>
+        <h4 class="box-title mt-5"><small> Number Plate :  </small>@Model.Vehicles.VehicleNumber</h4>
+        <h4 class="box-title mt-5"><small> Type :  </small>@Model.Vehicles.VehicleType.Name</h4>
+        <h4 class="box-title mt-5"><small> Description :  </small>@Model.Vehicles.Description</h4>
     </div>
     <table id="tblData" class="table table-striped" style="width:100%">
         <thead>

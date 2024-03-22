@@ -549,6 +549,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Data\" />
+    <Folder Include="wwwroot\images\VehicleMaintain\" />
+    <Folder Include="wwwroot\images\Vehicle\" />
   </ItemGroup>
 
 </Project>

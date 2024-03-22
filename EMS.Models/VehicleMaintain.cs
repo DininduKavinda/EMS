@@ -34,7 +34,6 @@ namespace EMS.Models
         [Required]
         [DisplayName("Maintain By")]
         public string? Maintain_By { get; set; }
-        [Required]
         public string? MaintainImage { get; set; }
         [ForeignKey("VehicleId")]
         public Vehicle? Vehicle { get; set; }

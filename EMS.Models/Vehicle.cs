@@ -24,7 +24,6 @@ namespace EMS.Models
         public int VehicleType_Id { get; set; }
         public string? Description { get; set; }
         public int Status { get; set; } = 0;
-        [Required]
         public string? VehicleImage { get; set; }
         [ForeignKey("VehicleType_Id")]
         public VehicleType? VehicleType { get; set; }
